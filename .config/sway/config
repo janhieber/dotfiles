@@ -195,27 +195,28 @@ bar {
         font pango:Sans 10, Icons 11
 }
 
-exec --no-startup-id xrdb -merge .Xresources &
-exec --no-startup-id numlockx &
-exec --no-startup-id nitrogen --restore &
-exec --no-startup-id autorandr -c &
-#exec --no-startup-id dropboxd &
-#exec --no-startup-id /bin/sh /home/jan/.bin/enabletp.sh &
-exec --no-startup-id /usr/bin/xset r rate 250 45 &
-#exec --no-startup-id mpd &
-exec --no-startup-id nm-applet --sm-disable &
-#exec --no-startup-id pnmixer &
-exec --no-startup-id /usr/bin/owncloud &
-exec --no-startup-id xfce4-power-manager --sm-client-disable &
-exec --no-startup-id xfce4-volumed-pulse &
-#exec --no-startup-id xautolock -time 30 -locker "i3lock -u -c 000000" &
+
+# Some simple personal preferences
+set $bg #1D1A18
+set $fg #9f9f9f
+set $hi #efef8f
+set $ac #a0afa0
+set $tx #040404
+set $ia #8f8f8f
+set $be #8faf9f
+set $yw #ccdc90
+set $gn #88b090
+set $rd #e89393
+set $id #1D1A18
+set $ce #ceecee
+
+# set some nice colors  border  background  text    indicator
+client.focused          $id     $ac         $tx     $id
+client.unfocused        $bg     $bg         $ia     $id
+client.focused_inactive $bg     $bg         $ac     $id
+client.urgent           $rd     $rd         $tx     $id
+
+include ~/.config/sway/config.d/`hostname`/*
 
 
-
-output eDP-1 disable
-
-output DP-3 res 1920x1200
-output DP-3 pos 0 0
-
-output DP-4 res 1920x1080
-output DP-4 pos 1920 0
+exec startup

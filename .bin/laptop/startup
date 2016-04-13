@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+xrdb ~/.Xresources
+
+autocutsel -fork
+autocutsel -fork -selection PRIMARY
+
+autorandr -c
+xset r rate 250 45
+
+numlockx &
+nm-applet --sm-disable &
+owncloud &
+xfce4-power-manager --sm-client-disable &
+xfce4-volumed-pulse &
+
+#dunst &
