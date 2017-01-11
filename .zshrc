@@ -5,7 +5,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerline"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -39,6 +40,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 POWERLINE_RIGHT_A="exit-status"
 POWERLINE_NO_BLANK_LINE="true"
+
+
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+
 
 # Uncomment following line if you want to  shown in the command execution time stamp 
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
@@ -86,4 +93,9 @@ alias -g L='| less'
 alias -g N='&> /dev/null'
 alias -g G='| grep -i'
 
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+bindkey "^[[4~" end-of-line
+bindkey "^[[1~" beginning-of-line
+
+xset r rate 250 45

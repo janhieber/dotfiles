@@ -26,14 +26,18 @@ font pango:Sans 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+
+
 # start a terminal
-bindsym $mod+Return exec --no-startup-id xfce4-terminal
+bindsym $mod+Return exec --no-startup-id urxvtc
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -fn 'Sans-14'
+#bindsym $mod+d exec --no-startup-id dmenu_run -fn 'Sans-14'
+bindsym $mod+d exec --no-startup-id rofi -show run -fg "#f1f1f1" -bg "#333333" -hlfg "#ffffff" -hlbg "#336699" -o 85
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -85,13 +89,12 @@ bindsym Mod1+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
 
-for_window [class="Uzbl-core"] focus child, layout stacking, focus
 
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
@@ -145,7 +148,7 @@ mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -159,6 +162,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -179,57 +183,59 @@ bindsym $mod+Print mode "$mode_system"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        colors {
-              background #000000
-              statusline #00A5FF #that neon blue
-              separator #666666
-              focused_workspace  #4c7899 #285577 #ffffff
-              active_workspace   #333333 #5f676a #ffffff
-              inactive_workspace #333333 #222222 #888888
-              urgent_workspace   #2f343a #900000 #ffffff
-        }
+#bar {
+#  status_command i3status
+#        position          top
+#        font pango:Sans 10, Icons 11
+#  colors {
+#    separator #666666
+#    background #222222
+#    statusline #dddddd
+#    focused_workspace #0088CC #0088CC #ffffff
+#    active_workspace #333333 #333333 #ffffff
+#    inactive_workspace #333333 #333333 #888888
+#    urgent_workspace #2f343a #900000 #ffffff
+#  }
+#}
 
-        status_command i3status
-        position          top
-        font pango:Sans 10, Icons 11
+
+bar {
+      status_command i3blocks -c ~/.i3/i3blocks.conf
+      #tray_output primary 
+      font pango:Sans 11
+      position top
+      colors {
+        separator          #666666
+        background         #222222
+        statusline         #dddddd
+        focused_workspace  #0088CC #0088CC #ffffff
+        active_workspace   #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
 }
 
 
-# Some simple personal preferences
-set $bg #1D1A18
-set $fg #9f9f9f
-set $hi #efef8f
-set $ac #a0afa0
-set $tx #040404
-set $ia #8f8f8f
-set $be #8faf9f
-set $yw #ccdc90
-set $gn #88b090
-set $rd #e89393
-set $id #1D1A18
-set $ce #ceecee
-# set some nice colors  border  background  text    indicator
-client.focused          $id     $ac         $tx     $id
-client.unfocused        $bg     $bg         $ia     $id
-client.focused_inactive $bg     $bg         $ac     $id
-client.urgent           $rd     $rd         $tx     $id
 
-include ~/.config/sway/config.d/`hostname`/*
 
-exec --no-startup-id xrdb -merge .Xresources &
-exec --no-startup-id numlockx &
-exec --no-startup-id nitrogen --restore &
-exec --no-startup-id autorandr -c &
-#exec --no-startup-id dropboxd &
-#exec --no-startup-id /bin/sh /home/jan/.bin/enabletp.sh &
-exec --no-startup-id /usr/bin/xset r rate 250 45 &
-#exec --no-startup-id mpd &
-exec --no-startup-id nm-applet --sm-disable &
-#exec --no-startup-id pnmixer &
-exec --no-startup-id /usr/bin/owncloud &
-exec --no-startup-id xfce4-power-manager --sm-client-disable &
-exec --no-startup-id xfce4-volumed-pulse &
-#exec --no-startup-id xautolock -time 30 -locker "i3lock -u -c 000000" &
 
-exec startup
+exec --no-startup-id /usr/local/bin/autorandr -c --default default
+exec --no-startup-id xrdb -merge .Xresources
+exec --no-startup-id numlockx on
+exec --no-startup-id nitrogen --restore
+#exec --no-startup-id dropboxd
+#exec --no-startup-id /bin/sh /home/jan/.bin/enabletp.sh
+exec --no-startup-id /usr/bin/xset r rate 250 45
+#exec --no-startup-id mpd
+exec --no-startup-id nm-applet --sm-disable
+#exec --no-startup-id pnmixer
+exec --no-startup-id /usr/bin/owncloud
+exec --no-startup-id xfce4-power-manager --sm-client-disable
+exec --no-startup-id xfce4-volumed-pulse
+exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc
+#exec --no-startup-id xautolock -time 30 -locker "i3lock -u -c 000000"
+exec --no-startup-id urxvtd
+
+#include ~/.config/sway/config.d/`hostname`/*
+#exec startup
+

@@ -6,7 +6,7 @@ set history=700
 
 " Enable filetype plugins
 filetype plugin on
-"filetype indent on
+filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -18,6 +18,14 @@ set autoread
 
 " Fast saving
 "nmap <leader>w :w!<cr>
+
+
+
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
+
 
 map N Nzz
 map n nzz

@@ -10,7 +10,7 @@ xset r rate 250 45
 
 numlockx &
 nm-applet --sm-disable &
-owncloud &
+#owncloud &
 xfce4-power-manager --sm-client-disable &
 xfce4-volumed-pulse &
 
