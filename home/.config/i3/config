@@ -200,7 +200,7 @@ bindsym $mod+Print mode "$mode_system"
 
 
 bar {
-      status_command i3blocks -c ~/.i3/i3blocks.conf
+      status_command i3blocks -c ~/.config/i3/i3blocks.conf
       #tray_output primary 
       font pango:Sans 11
       position top
@@ -219,23 +219,6 @@ bar {
 
 
 
-exec --no-startup-id /usr/local/bin/autorandr -c --default default
-exec --no-startup-id xrdb -merge .Xresources
-exec --no-startup-id numlockx on
-exec --no-startup-id nitrogen --restore
-#exec --no-startup-id dropboxd
-#exec --no-startup-id /bin/sh /home/jan/.bin/enabletp.sh
-exec --no-startup-id /usr/bin/xset r rate 250 45
-#exec --no-startup-id mpd
-exec --no-startup-id nm-applet --sm-disable
-#exec --no-startup-id pnmixer
-exec --no-startup-id /usr/bin/owncloud
-exec --no-startup-id xfce4-power-manager --sm-client-disable
-exec --no-startup-id xfce4-volumed-pulse
-exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc
-#exec --no-startup-id xautolock -time 30 -locker "i3lock -u -c 000000"
-exec --no-startup-id urxvtd
+exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
-#include ~/.config/sway/config.d/`hostname`/*
-#exec startup
 

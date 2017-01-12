@@ -27,6 +27,6 @@ do
     fi
     
     mkdir -p $(dirname $FO)
-    [ -a $FO ] || ln -sv $F $FO
+    [ -a $FO ] || ln -sv $(pwd)/$F $(pwd)/$FO
 done
 
