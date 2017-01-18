@@ -1,88 +1,5 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-POWERLINE_RIGHT_A="exit-status"
-POWERLINE_NO_BLANK_LINE="true"
-
-
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
-
-
-# Uncomment following line if you want to  shown in the command execution time stamp 
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/jan/.bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-export TERM="xterm-256color"
-
-DEFAULT_USER=jan@laptop
 
 ## alias declaration
-# shortcuts
 alias v='vim'
 alias p='sudo pacman'
 alias c='clear'
@@ -93,9 +10,83 @@ alias -g L='| less'
 alias -g N='&> /dev/null'
 alias -g G='| grep -i'
 
+## plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+## fix home/end buttons
 bindkey "^[[4~" end-of-line
 bindkey "^[[1~" beginning-of-line
 
-xset r rate 250 45
+## damn kb speed is always resetting
+if [ $DISPLAY ]; then xset r rate 250 45; fi
+
+## zsh setting
+# general auto complete
+autoload -Uz compinit
+compinit
+# auto complete with arrow keys, press tab twice
+zstyle ':completion:*' menu select
+
+
+# this is from intro
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+zstyle ':completion:*' max-errors 3 numeric
+
+
+
+# complete aliases
+setopt COMPLETE_ALIASES
+# history search
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+ 
+
+## functions for prompt
+git_branch () {
+    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
+    return 0;
+}
+git_dirty() {
+  local STATUS=''
+  STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+  if [[ -n $STATUS ]]; then
+    echo " *"
+  fi
+}
+git_prompt() {
+    if git status >/dev/null 2>&1; then
+        echo " %F{cyan}GIT[$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
+    fi
+}
+
+function get_pwd1() {
+    echo "${PWD/$HOME/~}"
+}
+
+function prompt_char {
+    if [ $UID -eq 0 ]; then echo " #"; else echo ' '$; fi
+}
+
+function sh_level {
+    if [ $SHLVL -gt 2 ]; then echo "⑂ "; fi
+}
+
+function exit_code {
+    local return_code="%(?..%F{red}%? %f)"
+    echo $return_code
+}
+
+
+## prompt
+
+setopt prompt_subst
+
+if [ $SSH_CONNECTION ]; then SSH="%n@%m"; else SSH=""; fi
+
+PROMPT='${SSH}$(git_prompt)$(prompt_char) '
+RPROMPT='$(sh_level)$(exit_code)%~'
