@@ -37,7 +37,10 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ## fix home/end buttons
 bindkey "^[[4~" end-of-line
+bindkey "^[[8~" end-of-line
 bindkey "^[[1~" beginning-of-line
+bindkey "^[[7~" beginning-of-line
+bindkey "^[[3~" delete-char
 
 ## damn kb speed is always resetting
 if [ $DISPLAY ]; then xset r rate 250 45; fi
@@ -61,7 +64,8 @@ zstyle ':completion::complete:*' cache-path $HOME/.zshcache
 setopt COMPLETE_ALIASES
 
 # history search
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+autoload up-line-or-beginning-search
+autoload down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 [[ -n "$key[Up]" ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
@@ -93,8 +97,7 @@ export EDITOR='vim'
 # ls colors
 autoload -U colors && colors
 (( $+commands[dircolors] )) && eval "$(dircolors -b)"
-
-
+ 
 ## functions for prompt
 git_branch () {
     git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
