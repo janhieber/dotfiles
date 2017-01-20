@@ -187,32 +187,24 @@ bindsym $mod+Print mode "$mode_system"
 #  status_command i3status
 #        position          top
 #        font pango:Sans 10, Icons 11
-#  colors {
-#    separator #666666
-#    background #222222
-#    statusline #dddddd
-#    focused_workspace #0088CC #0088CC #ffffff
-#    active_workspace #333333 #333333 #ffffff
-#    inactive_workspace #333333 #333333 #888888
-#    urgent_workspace #2f343a #900000 #ffffff
-#  }
+#
 #}
 
 
 bar {
-      status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
       #tray_output primary 
       font pango:Sans 11
       position top
-      colors {
-        separator          #666666
-        background         #222222
-        statusline         #dddddd
-        focused_workspace  #0088CC #0088CC #ffffff
-        active_workspace   #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace   #2f343a #900000 #ffffff
-    }
+  colors {
+    separator #AAAAAA
+    background #1f2326
+    statusline #FFFFFF
+    focused_workspace #9FCA56 #9FCA56 #151718
+    active_workspace #DCCD69 #DCCD69 #151718
+    inactive_workspace #1f2326 #1f2326 #AAAAAA
+    urgent_workspace #CE4045 #CE4045 #FFFFFF
+  }
 }
 
 
@@ -221,4 +213,7 @@ bar {
 
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
-
+client.focused #4F99D3 #4F99D3 #151718 #9FCA56
+client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
+client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
+client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
