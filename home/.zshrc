@@ -68,23 +68,24 @@ autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-[[ -n "$key[Up]" ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
-[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
 
 ## pressing ESC two times toggles 'sudo' in front of cmd
 sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    if [[ $BUFFER == sudo\ * ]]; then
-        LBUFFER="${LBUFFER#sudo }"
-    elif [[ $BUFFER == $EDITOR\ * ]]; then
-        LBUFFER="${LBUFFER#$EDITOR }"
-        LBUFFER="sudoedit $LBUFFER"
-    elif [[ $BUFFER == sudoedit\ * ]]; then
-        LBUFFER="${LBUFFER#sudoedit }"
-        LBUFFER="$EDITOR $LBUFFER"
-    else
-        LBUFFER="sudo $LBUFFER"
-    fi
+  [[ -z $BUFFER ]] && zle up-history
+  if [[ $BUFFER == sudo\ * ]]; then
+    LBUFFER="${LBUFFER#sudo }"
+  elif [[ $BUFFER == $EDITOR\ * ]]; then
+    LBUFFER="${LBUFFER#$EDITOR }"
+    LBUFFER="sudoedit $LBUFFER"
+  elif [[ $BUFFER == sudoedit\ * ]]; then
+    LBUFFER="${LBUFFER#sudoedit }"
+    LBUFFER="$EDITOR $LBUFFER"
+  else
+    LBUFFER="sudo $LBUFFER"
+  fi
 }
 zle -N sudo-command-line
 # Defined shortcut keys: [Esc] [Esc]
@@ -100,37 +101,37 @@ autoload -U colors && colors
  
 ## functions for prompt
 git_branch () {
-    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
-    return 0;
+  git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
+  return 0;
 }
 git_dirty() {
-    local STATUS=''
-    STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
-    if [[ -n $STATUS ]]; then
-        echo " *"
-    fi
+  local STATUS=''
+  STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+  if [[ -n $STATUS ]]; then
+    echo " *"
+  fi
 }
 git_prompt() {
-    if git status >/dev/null 2>&1; then
-        echo " %F{cyan}GIT[$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
-    fi
+  if git status >/dev/null 2>&1; then
+    echo " %F{cyan}GIT[$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
+  fi
 }
 
 function get_pwd1() {
-    echo "${PWD/$HOME/~}"
+  echo "${PWD/$HOME/~}"
 }
 
 function prompt_char {
-    if [ $UID -eq 0 ]; then echo " #"; else echo ' '$; fi
+  if [ $UID -eq 0 ]; then echo " #"; else echo ' '$; fi
 }
 
 function sh_level {
-    if [ $SHLVL -gt 2 ]; then echo "⑂ "; fi
+  if [ $SHLVL -gt 2 ]; then echo "⑂ "; fi
 }
 
 function exit_code {
-    local return_code="%(?..%F{red}%? %f)"
-    echo $return_code
+  local return_code="%(?..%F{red}%? %f)"
+  echo $return_code
 }
 
 
