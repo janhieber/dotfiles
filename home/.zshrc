@@ -42,26 +42,42 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[7~" beginning-of-line
 bindkey "^[[3~" delete-char
 
+bindkey "^R" history-incremental-search-backward
+bindkey "^[[A" history-incremental-pattern-search-backward
+bindkey "^[[B" history-incremental-pattern-search-forward
+
 ## damn kb speed is always resetting
 if [ $DISPLAY ]; then xset r rate 250 45; fi
 
 ## completions
 # general auto complete
 autoload -Uz compinit
-compinit
-# auto complete with arrow keys, press tab twice
-zstyle ':completion:*' menu select
-# this is from intro
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+compinit -C
+# Turn on menu selection only when selections do not fit on screen.
+zstyle ':completion:*' menu true=long select=long
+# Force rehash to have completion picking up new commands in path.
+_force_rehash() { (( CURRENT == 1 )) && rehash; return 1 }
+zstyle ':completion:::::' completer _force_rehash \
+                                    _complete \
+                                    _ignored \
+                                    _gnu_generic \
+                                    _approximate
+zstyle ':completion:*'    completer _complete \
+                                    _ignored \
+                                    _gnu_generic \
+                                    _approximate
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 3 numeric
+# Default colors for listings.
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
+# Separate directories from files.
+zstyle ':completion:*' list-dirs-first true
 # complete kill with ps
-zstyle ':completion:*:*:*:*:processes' command "ps -o pid,user,comm -x -w -w"
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 # Use caching so that commands like apt and dpkg complete are useable
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path $HOME/.zshcache
-# complete aliases
-setopt COMPLETE_ALIASES
+zstyle ':completion::complete:*' cache-path $HOME/.cache/zsh_comp
 
 # history search
 autoload up-line-or-beginning-search

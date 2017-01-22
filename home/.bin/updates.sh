@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
-UPDATESAUR=$(cower -u | wc -l)
-UPDATESPAC=$(checkupdates | wc -l)
-#[[ "${UPDATESPAC}" = "0" ]] && exit 0
-#[[ "${UPDATESAUR}" = "0" ]] && exit 0
+#!/bin/sh
 
-echo "   PAC: ${UPDATESPAC} AUR: ${UPDATESAUR} "
-exit 0
+UAUR=$(cower -u | wc -l)
+UPAC=$(checkupdates | wc -l)
+
+echo "   PAC: ${UPAC} AUR: ${UAUR} "
+

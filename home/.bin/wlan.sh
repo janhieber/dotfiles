@@ -12,3 +12,4 @@ else
     echo -n "@"
     echo -n $SPEED
 fi
+
