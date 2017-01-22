@@ -5,7 +5,8 @@ set nocompatible
 syntax on
 
 " Color scheme
-colorscheme peachpuff
+" https://github.com/sjl/badwolf
+colorscheme badwolf
 
 " Detect drak/light background
 set background&
