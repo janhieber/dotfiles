@@ -67,9 +67,12 @@ do
   fi
 done
 
+echo ""
+echo "NOTE restart i3"
 pidof i3 > /dev/null
-[[ $?i -eq 0 ]] && i3-msg restart
-[[ -f ~/.Xressources ]] && xrdb -load ~/.Xressources
+[ $? -eq 0 ] && i3-msg restart
+echo "NOTE reload .Xressources"
+[ -f ~/.Xressources ] && xrdb -load ~/.Xressources
 
-echo "remember copying some configs to /root!"
+echo "NOTE remember copying some configs to /root!"
 
