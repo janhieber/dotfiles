@@ -1,22 +1,26 @@
-Xcursor.theme: oxy-neon
-
+!! xft settings
 Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintmedium
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintmedium
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
-Xft.dpi:        96
+Xft.dpi: 96
 
-
-
-
+!! urxvt setting
 URxvt.perl-ext:
-URxvt.perl-ext-common:
 URxvt.font: xft:monospace:size=11
 URxvt.scrollBar: false
+URxvt.urgentOnBell: true
 
-!! solarizes
+!! urxvt url matcher
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+
+!! solarized colors
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -67,6 +71,7 @@ URxvt.scrollBar: false
 *color7:                S_base2
 *color15: S_base3
 
+!! rofi colors
 rofi.color-enabled: true
 rofi.color-window: #002b37, #9FCA56, #003642
 rofi.color-normal: #002b37, #819396, #002b37, #003642, #819396

@@ -60,8 +60,8 @@ _force_rehash() { (( CURRENT == 1 )) && rehash; return 1 }
 zstyle ':completion:::::' completer _force_rehash \
                                     _complete \
                                     _ignored \
-                                    _gnu_generic \
                                     _approximate
+#                                    _gnu_generic
 zstyle ':completion:*'    completer _complete \
                                     _ignored \
                                     _gnu_generic \

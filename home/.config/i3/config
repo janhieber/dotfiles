@@ -15,6 +15,8 @@ bindsym $mod+q kill
 #bindsym $mod+d exec --no-startup-id dmenu_run -fn 'Sans-14'
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+bindsym $mod+Shift+m move workspace to output right
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down

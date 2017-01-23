@@ -67,3 +67,9 @@ do
   fi
 done
 
+pidof i3 > /dev/null
+[[ $?i -eq 0 ]] && i3-msg restart
+[[ -f ~/.Xressources ]] && xrdb -load ~/.Xressources
+
+echo "remember copying some configs to /root!"
+
