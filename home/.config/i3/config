@@ -15,6 +15,13 @@ bindsym $mod+q kill
 #bindsym $mod+d exec --no-startup-id dmenu_run -fn 'Sans-14'
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle # mute sound
+
+
 bindsym $mod+Shift+m move workspace to output right
 
 # change focus
@@ -148,19 +155,19 @@ bar {
   font pango:Sans 11
   position top
   colors {
-    separator #AAAAAA
-    background #1f2326
-    statusline #FFFFFF
-    focused_workspace #9FCA56 #9FCA56 #151718
-    active_workspace #DCCD69 #DCCD69 #151718
-    inactive_workspace #1f2326 #1f2326 #AAAAAA
-    urgent_workspace #CE4045 #CE4045 #FFFFFF
+    separator #7d7d7d
+    background #141414
+    statusline #00b0ef
+    focused_workspace #00b0ef #141414 #00b0ef
+    active_workspace #141414 #141414 #00b0ef
+    inactive_workspace #141414 #141414 #7d7d7d
+    urgent_workspace #ff7066 #141414 #ff7066
   }
 }
 
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
-client.focused #4F99D3 #4F99D3 #151718 #9FCA56
-client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
-client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
-client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
+client.focused #00b0ef #00b0ef #141414 #ff7066
+client.focused_inactive #141414 #141414 #00b0ef #472b2a
+client.unfocused #141414 #141414 #7d7d7d #141414
+client.urgent #ff7066 #ff7066 #141414 #ff7066

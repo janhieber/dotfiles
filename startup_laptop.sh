@@ -7,8 +7,7 @@ nitrogen --restore &
 xset r rate 250 45 &
 nm-applet --sm-disable &
 nextcloud &
-#xfce4-power-manager --sm-client-disable &
-xfce4-volumed-pulse &
+dunst &
 compton --backend glx --paint-on-overlay --vsync opengl-swc &
 urxvtd &
 
