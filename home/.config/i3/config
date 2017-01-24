@@ -152,12 +152,12 @@ bindsym $mod+Print mode "$mode_system"
 bar {
   status_command i3blocks -c ~/.config/i3/i3blocks_`hostname`.conf
   #tray_output primary 
-  font pango:Sans 11
+  font pango:Sans 12
   position top
   colors {
     separator #7d7d7d
     background #141414
-    statusline #00b0ef
+    statusline #ffffff
     focused_workspace #00b0ef #141414 #00b0ef
     active_workspace #141414 #141414 #00b0ef
     inactive_workspace #141414 #141414 #7d7d7d

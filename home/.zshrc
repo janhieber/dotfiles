@@ -17,7 +17,7 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 #setopt HIST_BEEP               # Beep when accessing nonexistent history.
 
 ## alias declaration
-alias v='vim'
+alias v='nvim'
 alias p='sudo pacman'
 alias c='clear'
 alias q='exit'
