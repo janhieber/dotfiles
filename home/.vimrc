@@ -13,6 +13,11 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'rdnetto/YCM-Generator'
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " Install L9 and avoid a Naming conflict if you've already installed a
@@ -34,8 +39,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='badwolf'
 
+
+set encoding=utf8
+set guifont="Knack Nerd Font" 11
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Close all open buffers on entering a window if the only
@@ -66,6 +74,8 @@ set hidden
 
 " set leader key
 let mapleader=","
+
+nmap <F8> :TagbarToggle<CR>
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping

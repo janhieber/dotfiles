@@ -9,7 +9,7 @@ Xft.dpi: 96
 
 !! urxvt setting
 urxvt.perl-ext:
-urxvt.font: xft:monospace:size=11
+urxvt.font: xft:Knack Nerd Font:pixelsize=18
 urxvt.scrollBar: false
 urxvt.urgentOnBell: true
 urxvt.title: terminal
