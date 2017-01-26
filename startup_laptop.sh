@@ -1,5 +1,8 @@
 #!/bin/sh
 
+MONITOR=eDP-1 polybar main &
+MONITOR=HDMI-1 polybar main &
+
 autorandr -c --default default &
 xrdb -load .Xresources &
 numlockx on &

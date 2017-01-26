@@ -152,21 +152,21 @@ mode "$mode_system" {
 }
 bindsym $mod+Print mode "$mode_system"
 
-bar {
-  status_command i3blocks -c ~/.config/i3/i3blocks_`hostname`.conf
-  #tray_output primary 
-  font pango:Sans 12
-  position top
-  colors {
-    separator #7d7d7d
-    background #141414
-    statusline #ffffff
-    focused_workspace #00b0ef #141414 #00b0ef
-    active_workspace #141414 #141414 #00b0ef
-    inactive_workspace #141414 #141414 #7d7d7d
-    urgent_workspace #ff7066 #141414 #ff7066
-  }
-}
+#bar {
+#  status_command i3blocks -c ~/.config/i3/i3blocks_`hostname`.conf
+#  #tray_output primary 
+#  font pango:Sans 12
+#  position top
+#  colors {
+#    separator #7d7d7d
+#    background #141414
+#    statusline #ffffff
+#    focused_workspace #00b0ef #141414 #00b0ef
+#    active_workspace #141414 #141414 #00b0ef
+#    inactive_workspace #141414 #141414 #7d7d7d
+#    urgent_workspace #ff7066 #141414 #ff7066
+#  }
+#}
 
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 

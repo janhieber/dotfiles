@@ -17,15 +17,12 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'rdnetto/YCM-Generator'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'flazz/vim-colorschemes'
+Plugin 'morhetz/gruvbox'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -38,12 +35,11 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+
+
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
-
-
-set encoding=utf8
-set guifont="Knack Nerd Font" 11
+let g:airline_theme='gruvbox'
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Close all open buffers on entering a window if the only
@@ -58,24 +54,29 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-autocmd VimEnter * NERDTree     "Open by default
-autocmd VimEnter * wincmd p     "Set Coursour to right window
+" only start NERDTree when vim starts without file open
+autocmd VimEnter * if !argc() | NERDTree | endif
+nmap <F7> :NERDTreeToggle<CR>
+
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" Use X clipoboard
 set clipboard=unnamedplus
 
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
 
+" toggle tagbar on F8
+nmap <F8> :TagbarToggle<CR>
+
 " set leader key
 let mapleader=","
-
-nmap <F8> :TagbarToggle<CR>
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
@@ -96,18 +97,6 @@ nmap <leader>bl :ls<CR>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 " Syntax highlighting
 syntax on
 
@@ -115,7 +104,8 @@ syntax on
 set background=dark
 
 " Color scheme
-colorscheme solarized
+let g:gruvbox_italic=1
+colorscheme gruvbox
 
 " a=activate mouse, r=activate copy/pasting from X
 set mouse=r
