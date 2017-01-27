@@ -10,6 +10,6 @@ nextcloud &
 dunst &
 compton -b
 urxvtd -f
-
+feh --no-fehbg --bg-tile ~/dotfiles/bg.png
 ~/.bin/polybar_.sh
 

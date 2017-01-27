@@ -157,20 +157,33 @@ bindsym $mod+Print mode "$mode_system"
 #  #tray_output primary 
 #  font pango:Sans 12
 #  position top
-#  colors {
-#    separator #7d7d7d
-#    background #141414
-#    statusline #ffffff
-#    focused_workspace #00b0ef #141414 #00b0ef
-#    active_workspace #141414 #141414 #00b0ef
-#    inactive_workspace #141414 #141414 #7d7d7d
-#    urgent_workspace #ff7066 #141414 #ff7066
-#  }
+#
 #}
 
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
-client.focused #00b0ef #00b0ef #141414 #ff7066
-client.focused_inactive #141414 #141414 #00b0ef #472b2a
-client.unfocused #141414 #141414 #7d7d7d #141414
-client.urgent #ff7066 #ff7066 #141414 #ff7066
+set_from_resource $background background #000000
+set_from_resource $foreground foreground #000000
+set_from_resource $color0 color0 #000000
+set_from_resource $color1 color1 #000000
+set_from_resource $color2 color2 #000000
+set_from_resource $color3 color3 #000000
+set_from_resource $color4 color4 #000000
+set_from_resource $color5 color5 #000000
+set_from_resource $color6 color6 #000000
+set_from_resource $color7 color7 #000000
+set_from_resource $color8 color8 #000000
+set_from_resource $color9 color9 #000000
+set_from_resource $color10 color10 #000000
+set_from_resource $color11 color11 #000000
+set_from_resource $color12 color12 #000000
+set_from_resource $color13 color13 #000000
+set_from_resource $color14 color14 #000000
+set_from_resource $color15 color15 #000000
+
+set $colorX #3a3a3a
+
+client.focused $color6 $color6 $color0 $color0
+client.focused_inactive $color0 $color0 $color8 $color0
+client.unfocused $colorX $colorX $color8 $color0
+client.urgent $color1 $color1 $foreground $color0

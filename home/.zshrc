@@ -68,6 +68,7 @@ zstyle ':completion:*'    completer _complete \
                                     _approximate
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 3 numeric
+setopt AUTO_CD
 # Default colors for listings.
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
 # Separate directories from files.
