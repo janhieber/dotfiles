@@ -183,7 +183,7 @@ set_from_resource $color15 color15 #000000
 
 set $colorX #3a3a3a
 
-client.focused $color6 $color6 $color0 $color0
+client.focused $color12 $color12 $color0 $color0
 client.focused_inactive $color0 $color0 $color8 $color0
 client.unfocused $colorX $colorX $color8 $color0
 client.urgent $color1 $color1 $foreground $color0

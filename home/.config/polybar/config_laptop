@@ -9,6 +9,7 @@ alert = ${xrdb:color1}
 
 [bar/main]
 monitor = ${env:MONITOR}
+;monitor-strict = false
 width = 100%
 height = 28
 offset-x = 0
