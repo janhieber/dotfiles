@@ -102,7 +102,7 @@ URxvt.color250: #d5c4a1
 !! rofi colors
 rofi.color-enabled: true
 !                  bg       border   separator
-rofi.color-window: *background, #a89984, #a89984
+rofi.color-window: #282828, #a89984, #a89984
 !                  bg       fg       bg-alt   hl-bg    hl-fg
 rofi.color-normal: #282828, #ebdbb2, #32302f, #665c54, #fbf1c7
 rofi.color-active: #d79921, #282828, #d79921, #fabd2f, #282828

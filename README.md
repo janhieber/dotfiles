@@ -6,8 +6,8 @@ It'll ask you before deleting your files ;)
 This is how the desktop looks like.  
 ![preview](https://raw.githubusercontent.com/janhieber/dotfiles/master/scrot.png)
 
-Before you ask:  
+# Before you ask  
 wm: i3  
-status: i3blocks  
+status: polybar  
 terminal: urxvt  
 shell: zsh

@@ -17,13 +17,16 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec ~/.bin/volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.bin/volume.sh down
-bindsym XF86AudioMute exec ~/.bin/volume.sh toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.bin/volume.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.bin/volume.sh down
+bindsym XF86AudioMute exec --no-startup-id ~/.bin/volume.sh toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec ~/.bin/brightness.sh up
-bindsym XF86MonBrightnessDown exec ~/.bin/brightness.sh down
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.bin/brightness.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.bin/brightness.sh down
+
+bindsym XF86Sleep exec --no-startup-id systemctl suspend
+bindsym XF86Calculator exec --no-startup-id gnome-calculator
 
 bindsym $mod+Shift+m move workspace to output right
 
