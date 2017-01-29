@@ -17,9 +17,9 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.bin/volume.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.bin/volume.sh down
-bindsym XF86AudioMute exec --no-startup-id ~/.bin/volume.sh toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute exec --no-startup-id pamixer -t
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.bin/brightness.sh up
@@ -27,6 +27,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.bin/brightness.sh down
 
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
+bindsym $mod+Print exec --no-startup-id ~/.bin/i3lock-fancy.sh
 
 bindsym $mod+Shift+m move workspace to output right
 
@@ -54,41 +55,22 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-#bindsym $mod+h split h
-
-# split in vertical orientation
-#bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym Mod1+Shift+space floating toggle
+#bindsym Mod1+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 workspace_auto_back_and_forth yes
 #bindsym $mod+z workspace back_and_forth
-
-# Make the currently focused window a scratchpad
-#bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-#bindsym $mod+minus scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -134,8 +116,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#bindsym $mod+Print mode "$mode_system"
-bindsym $mod+Print exec --no-startup-id ~/.bin/i3lock-fancy.sh
 
 # load startup apps
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
