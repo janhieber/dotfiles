@@ -8,7 +8,9 @@ git clone https://github.com/janhieber/dotfiles.git
 ```
 It'll ask you before deleting your files ;)
 
-This is how the desktop looks like.  
+This is how the desktop looks like  
+(yes I like pastel colors, the oldschool look and a minimal prompt)
+
 ![preview](https://raw.githubusercontent.com/janhieber/dotfiles/master/scrot.png)
 
 # before you ask  
