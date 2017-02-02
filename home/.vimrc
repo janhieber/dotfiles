@@ -65,6 +65,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" when pressing r, replace marked section with reister
+vmap r "_dP
+
 " Use X clipoboard
 set clipboard=unnamedplus
 
