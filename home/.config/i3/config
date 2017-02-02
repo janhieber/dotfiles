@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Knack Nerd Font 12
+font pango:Sans 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -81,7 +81,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+9 workspace 9:Chat
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
@@ -93,7 +93,7 @@ bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+9 move container to workspace 9:Chat
 bindsym $mod+Shift+0 move container to workspace 10
 
 
@@ -140,10 +140,9 @@ set_from_resource $color13 color13 #000000
 set_from_resource $color14 color14 #000000
 set_from_resource $color15 color15 #000000
 
-set $colorX #3a3a3a
-
 client.focused $color12 $color12 $color0 $color0
 client.focused_inactive $color0 $color0 $color8 $color0
-client.unfocused $colorX $colorX $color8 $color0
+client.unfocused $color0 $color0 $color8 $color0
 client.urgent $color1 $color1 $foreground $color0
+
 

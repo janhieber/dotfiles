@@ -18,6 +18,7 @@ nm-applet &
 nextcloud &
 dunst &
 urxvtd -f
+i3-msg 'workspace 9:Chat; exec qutebrowser --backend webengine -r chat'
 
 # set bg and launch bars
 feh --no-fehbg --bg-tile ~/dotfiles/bg.png

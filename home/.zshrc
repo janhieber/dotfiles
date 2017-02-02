@@ -54,7 +54,7 @@ if [ $DISPLAY ]; then xset r rate 250 45; fi
 autoload -Uz compinit
 compinit -C
 # Turn on menu selection only when selections do not fit on screen.
-zstyle ':completion:*' menu true=long select=long
+zstyle ':completion:*' menu select
 # Force rehash to have completion picking up new commands in path.
 _force_rehash() { (( CURRENT == 1 )) && rehash; return 1 }
 zstyle ':completion:::::' completer _force_rehash \
