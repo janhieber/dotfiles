@@ -18,10 +18,15 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 
 ## alias declaration
 alias v='nvim'
-alias p='sudo pacman'
+alias p='pacman'
 alias c='clear'
 alias q='exit'
+
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit -m'
 alias gp='git push origin master'
+
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -30,6 +35,8 @@ alias -g N='&> /dev/null'
 alias -g G='| grep -i'
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias ls='ls --color=tty'
+
+
 
 ## plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -20,12 +20,8 @@ dunst &
 urxvtd -f
 i3-msg 'workspace 9:Chat; exec qutebrowser --backend webengine -r chat'
 
-<<<<<<< HEAD
-~/.bin/polybar_$(hostname).sh
-=======
 # set bg and launch bars
 feh --no-fehbg --bg-tile ~/dotfiles/bg.png
 ~/.bin/polybar_$(hostname).sh
 xeventbind resolution ~/.bin/polybar_$(hostname).sh &
->>>>>>> 2bcda9510d64356575a05002d95cd8b5330145fb
 
