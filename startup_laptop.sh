@@ -18,10 +18,10 @@ nm-applet &
 nextcloud &
 dunst &
 urxvtd -f
-i3-msg 'workspace 9:Chat; exec qutebrowser --backend webengine -r chat'
+#i3-msg 'workspace 9:Chat; exec qutebrowser --backend webengine -r chat'
+profile-cleaner f &
 
-# set bg and launch bars
-feh --no-fehbg --bg-tile ~/dotfiles/bg.png
+# launch bars
 ~/.bin/polybar_$(hostname).sh
 xeventbind resolution ~/.bin/polybar_$(hostname).sh &
 

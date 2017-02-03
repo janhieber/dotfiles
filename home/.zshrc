@@ -17,8 +17,8 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 #setopt HIST_BEEP               # Beep when accessing nonexistent history.
 
 ## alias declaration
-alias v='nvim'
-alias p='pacman'
+[[ -f /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
+[[ -f /usr/bin/pacman ]] && alias p='pacman'
 alias c='clear'
 alias q='exit'
 
@@ -31,16 +31,19 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias -g L='| less'
-alias -g N='&> /dev/null'
-alias -g G='| grep -i'
-alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
-alias ls='ls --color=tty'
-
+alias -g G='| grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -lh --color=auto --group-directories-first'
 
 
 ## plugins
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+for plugin in \
+  "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+do
+  [[ -f $plugin ]] && source $plugin
+done
 
 ## fix home/end buttons
 bindkey "^[[4~" end-of-line
@@ -54,7 +57,8 @@ bindkey "^[[A" history-incremental-pattern-search-backward
 bindkey "^[[B" history-incremental-pattern-search-forward
 
 ## damn kb speed is always resetting
-if [ $DISPLAY ]; then xset r rate 250 45; fi
+[[ $DISPLAY ]] && [[ -f /usr/bin/xset ]] && [[ "$(id -u)" -ne 0 ]] && \
+  /usr/bin/xset r rate 250 45
 
 ## completions
 # general auto complete
@@ -77,7 +81,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 3 numeric
 setopt AUTO_CD
 # Default colors for listings.
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
+#zstyle -e ':completion:*:default' list-colors 'reply=("${(s.:.)LS_COLORS}")'
 # Separate directories from files.
 zstyle ':completion:*' list-dirs-first true
 # complete kill with ps
@@ -118,39 +122,42 @@ bindkey "\e\e" sudo-command-line
 
 ## other stuff
 # exports
-export EDITOR='vim'
+[[ -f /usr/bin/nvim ]] && EDITOR='nvim' || EDITOR='vim'
+export EDITOR
+
 # ls colors
 autoload -U colors && colors
 (( $+commands[dircolors] )) && eval "$(dircolors -b)"
  
 ## functions for prompt
-git_branch () {
-  git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
+function git_branch () {
+  git branch --no-color 2>/dev/null | \
+    sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' \
+      -e 's/(HEAD detached at //' -e 's/)//' \
+      -e 's/(detached from //';
   return 0;
 }
-git_dirty() {
+function git_dirty() {
   local STATUS=''
   STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
   if [[ -n $STATUS ]]; then
     echo " *"
   fi
 }
-git_prompt() {
+function git_prompt() {
   if git status >/dev/null 2>&1; then
-    echo " %F{cyan}GIT[$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
+    echo " %F{cyan}GIT[%f$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
   fi
 }
 
-function get_pwd1() {
-  echo "${PWD/$HOME/~}"
-}
-
 function prompt_char {
-  if [ $UID -eq 0 ]; then echo " #"; else echo ' '$; fi
+  [[ $UID -eq 0 ]] && echo ' #' || echo ' $'
 }
 
 function sh_level {
-  if [ $SHLVL -gt 2 ]; then echo "⑂ "; fi
+  # print fork symbol when in subshell
+  # we need to tell zsh that fork symbol is width=1
+  [[ $SHLVL -gt 2 ]] && echo -e "%1{\xE2\x8B\x94%} "
 }
 
 function exit_code {
@@ -163,7 +170,28 @@ function exit_code {
 
 setopt prompt_subst
 
-if [ $SSH_CONNECTION ]; then SSH="%n@%m"; else SSH=""; fi
+# SSH prompt
+[[ -n $SSH_CONNECTION ]] && SSH="%n@%m" || SSH=""
+# chroot prompt
+if [[ $(stat -c %i /) -ne 2 ]]; then
+  [[ -n $SCHROOT_SESSION_ID ]] && \
+    CHROOT="%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f" || \
+    CHROOT="%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
+else
+  CHROOT=''
+fi
 
-PROMPT='${SSH}$(git_prompt)$(prompt_char) '
+PROMPT='${SSH}${CHROOT}$(git_prompt)$(prompt_char) '
 RPROMPT='$(sh_level)$(exit_code)%~'
+
+# fix some chroot stuff
+if [[ $SCHROOT_SESSION_ID ]]; then
+  [[ $TERM = "rxvt-unicode-256color" ]] && export TERM='rxvt-unicode'
+  if [[ "$(id -u)" -eq 0 ]]; then
+    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  else
+    PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+  fi
+  export PATH
+fi
+
