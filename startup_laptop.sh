@@ -11,5 +11,5 @@ dunst &
 compton -b
 urxvtd -f
 
-~/.bin/polybar_.sh
+~/.bin/polybar_$(hostname).sh
 
