@@ -111,7 +111,8 @@ let g:gruvbox_italic=1
 colorscheme gruvbox
 
 " a=activate mouse, r=activate copy/pasting from X
-set mouse=r
+"set mouse=r
+set mouse-=a
 
 " Show line numbers
 set number

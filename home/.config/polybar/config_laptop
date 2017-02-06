@@ -31,7 +31,7 @@ font-0 = Sans:size=12;2
 ;font-2 = FontAwesome:size=12;0
 modules-left = i3
 ;modules-center = mpd
-modules-right = volume filesystem wlan eth avg-battery temperature memory cpu load date
+modules-right = spotify volume filesystem wlan eth avg-battery temperature memory cpu load date
 tray-position = right
 tray-padding = 2
 ;tray-transparent = true
@@ -168,8 +168,6 @@ format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
 label = %output%
 
-
-
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -183,4 +181,13 @@ format-warn = <label-warn>
 label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
+
+[module/spotify]
+type = custom/script
+exec = /usr/bin/env sh -c /home/jan/.bin/spotify.sh
+interval = 10
+format-prefix = "PLAY: "
+format-prefix-foreground = ${colors.foreground-alt}
+format = <label>
+label = %output%
 
