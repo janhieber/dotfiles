@@ -155,7 +155,7 @@ function prompt_git() {
 }
 
 function prompt_char {
-  [[ $UID -eq 0 ]] && print ' #' || print ' $'
+  [[ $UID -eq 0 ]] && print ' %F{red}#%f' || print ' >'
 }
 
 function prompt_shlvl {
@@ -186,10 +186,8 @@ function prompt_chroot {
 
 setopt promptsubst
 
-
-NL=$'\n'
-PROMPT="$(prompt_ssh)$(prompt_chroot)$(prompt_git)$(prompt_char) "
-RPROMPT="$(prompt_shlvl)$(prompt_ecode)%~"
+PROMPT='$(prompt_ssh)$(prompt_chroot)$(prompt_git)$(prompt_char) '
+RPROMPT='$(prompt_shlvl)$(prompt_ecode)%~'
 
 # fix some chroot stuff
 if [[ $SCHROOT_SESSION_ID ]]; then

@@ -1,7 +1,7 @@
 !! xft settings
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintmedium
+Xft.hintstyle: hintslight
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
@@ -13,6 +13,7 @@ urxvt.font: xft:monospace:size=12
 urxvt.scrollBar: false
 urxvt.urgentOnBell: true
 urxvt.title: terminal
+urxvt*cursorUnderline: true
 !! urxvt url matcher
 urxvt.perl-ext-common: default,matcher
 urxvt.url-launcher: /usr/bin/xdg-open
