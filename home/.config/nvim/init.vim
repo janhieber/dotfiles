@@ -64,8 +64,7 @@ set clipboard=unnamedplus
 set hidden
 
 " a=activate mouse, r=activate copy/pasting from X
-set mouse=r
-"set mouse=""
+set mouse-=a
 
 set number
 set ruler

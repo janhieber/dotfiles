@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Sans 10
+font pango:Sans 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -14,6 +14,20 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run -fn 'Sans-14'
 bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Tab exec --no-startup-id rofi -show window
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute exec --no-startup-id pamixer -t
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.bin/brightness.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.bin/brightness.sh down
+
+bindsym XF86Sleep exec --no-startup-id systemctl suspend
+bindsym XF86Calculator exec --no-startup-id gnome-calculator
+bindsym $mod+Print exec --no-startup-id ~/.bin/i3lock-fancy.sh
 
 bindsym $mod+Shift+m move workspace to output right
 
@@ -41,41 +55,22 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-#bindsym $mod+h split h
-
-# split in vertical orientation
-#bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym Mod1+Shift+space floating toggle
+#bindsym Mod1+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 workspace_auto_back_and_forth yes
 #bindsym $mod+z workspace back_and_forth
-
-# Make the currently focused window a scratchpad
-#bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-#bindsym $mod+minus scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -86,7 +81,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+9 workspace 9:Chat
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
@@ -98,15 +93,9 @@ bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+9 move container to workspace 9:Chat
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-#bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -127,40 +116,37 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-  bindsym l exec --no-startup-id i3exit lock, mode "default"
-  bindsym e exec --no-startup-id i3exit logout, mode "default"
-  bindsym s exec --no-startup-id i3exit suspend, mode "default"
-  bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-  bindsym r exec --no-startup-id i3exit reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
 
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-bindsym $mod+Print mode "$mode_system"
 
-bar {
-  status_command i3blocks -c ~/.config/i3/i3blocks_`hostname`.conf
-  #tray_output primary 
-  font pango:Sans 11
-  position top
-  colors {
-    separator #AAAAAA
-    background #1f2326
-    statusline #FFFFFF
-    focused_workspace #9FCA56 #9FCA56 #151718
-    active_workspace #DCCD69 #DCCD69 #151718
-    inactive_workspace #1f2326 #1f2326 #AAAAAA
-    urgent_workspace #CE4045 #CE4045 #FFFFFF
-  }
-}
+# include host config
+include ./config_`hostname`
 
+# load startup apps
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
-client.focused #4F99D3 #4F99D3 #151718 #9FCA56
-client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
-client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
-client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
+# import xressources
+set_from_resource $background background #000000
+set_from_resource $foreground foreground #000000
+set_from_resource $color0 color0 #000000
+set_from_resource $color1 color1 #000000
+set_from_resource $color2 color2 #000000
+set_from_resource $color3 color3 #000000
+set_from_resource $color4 color4 #000000
+set_from_resource $color5 color5 #000000
+set_from_resource $color6 color6 #000000
+set_from_resource $color7 color7 #000000
+set_from_resource $color8 color8 #000000
+set_from_resource $color9 color9 #000000
+set_from_resource $color10 color10 #000000
+set_from_resource $color11 color11 #000000
+set_from_resource $color12 color12 #000000
+set_from_resource $color13 color13 #000000
+set_from_resource $color14 color14 #000000
+set_from_resource $color15 color15 #000000
+
+client.focused $color12 $color12 $color0 $color0
+client.focused_inactive $color0 $color0 $color8 $color0
+client.unfocused $color0 $color0 $color8 $color0
+client.urgent $color1 $color1 $foreground $color0
+
+

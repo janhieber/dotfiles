@@ -10,4 +10,5 @@ output eDP-1 pos 1920 0 res 1920x1080
 output HDMI-A-1 pos 0 0 res 1920x1080
 #output DP-4 pos 1920 0 res 1920x1080
 
-output * bg ~/Wallpaper/current.jpg fill
+output * bg ~/dotfiles/bg.png tile
+

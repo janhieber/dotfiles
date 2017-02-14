@@ -15,8 +15,32 @@
 # If you have a Intel CPU, install intel-ucode! Otherwise remove
 # it from the cmdline below.
 
-efibootmgr -d /dev/sda \
-  -p 1 -c -L "Arch Linux EFISTUB" \
-  -l /EFI/arch/vmlinuz-linux \
-  -u "root=UUID=4d4167d6-761e-4b5b-b92b-a803a7c95258 rw initrd=/EFI/arch/intel-ucode.img initrd=/EFI/arch/initramfs-linux.img" 
+NAME='Arch Linux EFISTUB'
+DRIVE='/dev/sda'
+BOOTPART=1
+KERNEL='/EFI/arch/vmlinuz-linux'
+ROOT='UUID=4d4167d6-761e-4b5b-b92b-a803a7c95258'
+RESUME='UUID=5c323946-60e1-4cfe-8e50-140a685f8648'
+INITRD1='/EFI/arch/intel-ucode.img'
+INITRD2='/EFI/arch/initramfs-linux.img'
+PARAMS='rw quiet'
+
+# looking for old entry
+OLD=$(efibootmgr | grep "Arch Linux EFISTUB" | cut -d' ' -f1 | sed -e 's/*//' -e 's/Boot//')
+if [[ ${#OLD} -eq 4 ]]; then
+  echo "== found old entry, deleting: $OLD"
+  efibootmgr -b $OLD -B > /dev/null
+fi
+
+# building opts
+ARGS=''
+[[ ${#ROOT} -gt 2 ]] && ARGS="$ARGS root=$ROOT"
+[[ ${#RESUME} -gt 2 ]] && ARGS="$ARGS resume=$RESUME"
+[[ ${#INITRD1} -gt 2 ]] && ARGS="$ARGS initrd=$INITRD1"
+[[ ${#INITRD2} -gt 2 ]] && ARGS="$ARGS initrd=$INITRD2"
+[[ ${#PARAMS} -gt 2 ]] && ARGS="$ARGS $PARAMS"
+
+# creating entry
+efibootmgr -d $DRIVE -p $BOOTPART \
+  -c -L "$NAME" -l "$KERNEL" -u "$ARGS"
 
