@@ -27,7 +27,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.bin/brightness.sh down
 
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
-bindsym $mod+Print exec --no-startup-id ~/.bin/i3lock-fancy.sh
+bindsym $mod+Print exec --no-startup-id ~/.bin/powermenu.sh
 
 bindsym $mod+Mod1+Right move workspace to output right
 bindsym $mod+Mod1+Left move workspace to output left
