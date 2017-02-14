@@ -130,59 +130,62 @@ autoload -U colors && colors
 (( $+commands[dircolors] )) && eval "$(dircolors -b)"
  
 ## functions for prompt
-function git_branch () {
+function prompt_git_branch () {
   git branch --no-color 2>/dev/null | \
     sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' \
       -e 's/(HEAD detached at //' -e 's/)//' \
       -e 's/(detached from //';
   return 0;
 }
-function git_dirty() {
+function prompt_git_dirty() {
   local STATUS=''
   STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
   if [[ -n $STATUS ]]; then
     echo " *"
   fi
 }
-function git_prompt() {
+function prompt_git() {
   if git status >/dev/null 2>&1; then
-    echo " %F{cyan}GIT[%f$(git_branch)%f%F{red}$(git_dirty)%f%F{cyan}]%f"
+    echo " %F{cyan}GIT[%f$(prompt_git_branch)%f%F{red}$(prompt_git_dirty)%f%F{cyan}]%f"
   fi
 }
 
 function prompt_char {
-  [[ $UID -eq 0 ]] && echo ' #' || echo ' $'
+  [[ $UID -eq 0 ]] && print ' #' || print ' $'
 }
 
-function sh_level {
+function prompt_shlvl {
   # print fork symbol when in subshell
   # we need to tell zsh that fork symbol is width=1
   [[ $SHLVL -gt 2 ]] && echo -e "%1{\xE2\x8B\x94%} "
 }
 
-function exit_code {
-  local return_code="%(?..%F{red}%? %f)"
-  echo $return_code
+function prompt_ecode {
+  print "%(?..%F{red}%? %f)"
 }
 
+function prompt_ssh {
+  [[ -n $SSH_CONNECTION ]] && print "%n@%m"
+}
+
+function prompt_chroot {
+  if [[ $(stat -c %i /) -ne 2 ]]; then
+    if [[ -n $SCHROOT_SESSION_ID ]];then
+      print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
+    else
+       print "%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
+    fi
+  fi
+}
 
 ## prompt
 
-setopt prompt_subst
+setopt promptsubst
 
-# SSH prompt
-[[ -n $SSH_CONNECTION ]] && SSH="%n@%m" || SSH=""
-# chroot prompt
-if [[ $(stat -c %i /) -ne 2 ]]; then
-  [[ -n $SCHROOT_SESSION_ID ]] && \
-    CHROOT="%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f" || \
-    CHROOT="%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
-else
-  CHROOT=''
-fi
 
-PROMPT='${SSH}${CHROOT}$(git_prompt)$(prompt_char) '
-RPROMPT='$(sh_level)$(exit_code)%~'
+NL=$'\n'
+PROMPT="$(prompt_ssh)$(prompt_chroot)$(prompt_git)$(prompt_char) "
+RPROMPT="$(prompt_shlvl)$(prompt_ecode)%~"
 
 # fix some chroot stuff
 if [[ $SCHROOT_SESSION_ID ]]; then
