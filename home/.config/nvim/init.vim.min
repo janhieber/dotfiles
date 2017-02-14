@@ -1,0 +1,63 @@
+" This minimal config is for small machines with not
+" much power.
+
+" a=activate mouse, r=activate copy/pasting from X
+set mouse=""
+
+set number
+set ruler
+set showmatch
+
+filetype indent on
+
+set smartcase
+set ignorecase
+set wrapscan
+
+set preserveindent
+set shiftwidth=2
+set shiftround
+set tabstop=2
+set softtabstop=2
+set expandtab
+set scrolloff=5
+
+" Always stay on the same column
+set nostartofline
+
+
+
+
+""""""""""""""""""" some UI stuff
+" detect drak/light background
+set background=dark
+" color scheme
+colorscheme default
+" Status bar format
+set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
+" Ruler formatting
+set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
+
+
+
+
+""""""""""""""""""" some special stuff and hacks
+" Get root privilieges while editing a file
+cmap w!! %!sudo tee > /dev/null %
+
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+
+
+
+""""""""""""""""""" key mapping
+" set leader key
+let mapleader=","
+
+" when pressing r, replace marked section with register
+vmap r "_dP
+
+set pastetoggle=<F5>
+
