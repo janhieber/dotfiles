@@ -43,3 +43,28 @@ Look [here](/root/etc/systemd/system) for the service files
 and [here](/home/scripts/efistub_bootentry.sh) for the script to
 make the UEFI entry. The instructions are in the script.
 
+# autorandr
+To automatically change display configuration
+when connecting display, follow this:
+
+Copy [40-monitor-hotplug.rules](/root/etc/udev/rules.d/40-monitor-hotplug.rules) to
+your system and change my username to yours. Then reload the
+udev rules with ``udevadm control --reload``.
+
+Now copy [autorandr.sh](/home/.bin/autorandr.sh) to your system
+and change my username again.
+
+Download [autorandr](https://github.com/phillipberndt/autorandr) with
+```bash
+sudo wget https://raw.githubusercontent.com/phillipberndt/autorandr/master/autorandr.py -O /usr/local/bin/autorandr
+sudochmod +x /usr/local/bin/autorandr
+```
+Warning: The other versions in AUR are old and not maintained! Use this one!
+
+With ``arandr`` or somethign else, configure your default screen layout (eg. only laptop screen). Then save the config with ``autorandr -s default``.  
+Now, everytime you have a new display connected, set it up with xrandr or arandr
+and save the profile with a specific name, example: ``autorandr -s tv``
+
+When your display adapters change, udev calls autorandr, which configures your
+screens!
+
