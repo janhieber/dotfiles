@@ -122,8 +122,8 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
 
 # import xressources
-set_from_resource $background background #000000
-set_from_resource $foreground foreground #000000
+set_from_resource $bg background #000000
+set_from_resource $fg foreground #000000
 set_from_resource $color0 color0 #000000
 set_from_resource $color1 color1 #000000
 set_from_resource $color2 color2 #000000
@@ -140,10 +140,14 @@ set_from_resource $color12 color12 #000000
 set_from_resource $color13 color13 #000000
 set_from_resource $color14 color14 #000000
 set_from_resource $color15 color15 #000000
+set $colorA #3a3a3a
 
-client.focused $color12 $color12 $color0 $color0
-client.focused_inactive $color0 $color0 $color8 $color0
-client.unfocused $color0 $color0 $color8 $color0
-client.urgent $color1 $color1 $foreground $color0
+#              <border> <background> <text> <indicator> <child_border>
+client.focused          $color12 $color12 $color0 $color0
+client.focused_inactive $colorA  $colorA  $color8 $color0
+client.unfocused        $colorA  $colorA  $color8 $color0
+client.urgent           $color1  $color1  $fg     $color0
+
+client.background       #ffffff
 
 
