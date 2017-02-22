@@ -57,7 +57,7 @@ and change my username again.
 Download [autorandr](https://github.com/phillipberndt/autorandr) with
 ```bash
 sudo wget https://raw.githubusercontent.com/phillipberndt/autorandr/master/autorandr.py -O /usr/local/bin/autorandr
-sudochmod +x /usr/local/bin/autorandr
+sudo chmod +x /usr/local/bin/autorandr
 ```
 Warning: The other versions in AUR are old and not maintained! Use this one!
 

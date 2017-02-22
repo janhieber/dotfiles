@@ -7,4 +7,5 @@ convert $IMAGE -filter Gaussian -resize 25% -define filter:sigma=$SIGMA -resize 
 rm $IMAGE
 i3lock -i ${IMAGE%.jpg}.png -t -I 10 -u -e
 rm ${IMAGE%.jpg}.png
+xset dpms force off
 

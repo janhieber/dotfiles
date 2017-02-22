@@ -19,8 +19,13 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 ## alias declaration
 [[ -f /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
 if [[ -f /usr/bin/pacman ]]; then
-  alias p='pacman'
-  [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
+  if [[ -f /usr/bin/apacman ]]; then
+    alias p='apacman'
+    alias sp='apacman'
+  else
+    alias p='pacman'
+    [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
+  fi
 fi
 
 alias c='clear'
