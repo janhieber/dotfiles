@@ -69,6 +69,7 @@ set mouse-=a
 set number
 set ruler
 set showmatch
+set cursorline
 
 " Detect filetype for indentation
 "if has("autocmd")
