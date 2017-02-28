@@ -15,14 +15,14 @@
 # If you have a Intel CPU, install intel-ucode! Otherwise remove
 # it from the cmdline below.
 
-NAME='Arch Linux EFISTUB'
+NAME='Arch Linux -ck EFISTUB'
 DRIVE='/dev/sda'
 BOOTPART=1
-KERNEL='/EFI/arch/vmlinuz-linux'
+KERNEL='/EFI/arch/vmlinuz-linux-ck-haswell'
 ROOT='UUID=4d4167d6-761e-4b5b-b92b-a803a7c95258'
 RESUME='UUID=5c323946-60e1-4cfe-8e50-140a685f8648'
 INITRD1='/EFI/arch/intel-ucode.img'
-INITRD2='/EFI/arch/initramfs-linux.img'
+INITRD2='/EFI/arch/initramfs-linux-ck-haswell.img'
 PARAMS='rw quiet'
 
 # looking for old entry
