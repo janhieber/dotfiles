@@ -3,33 +3,31 @@
 
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'morhetz/gruvbox'
-Plugin 'bogado/file-line'
-Plugin 'vivien/vim-linux-coding-style'
-call vundle#end()
-
+set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state('~/.config/nvim/dein')
+  call dein#begin('~/.config/nvim/dein')
+  call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('bogado/file-line')
+  call dein#add('vivien/vim-linux-coding-style')
+  call dein#add('roxma/nvim-completion-manager')
+  call dein#add('roxma/clang_complete')
+  call dein#add('arakashic/chromatica.nvim')
+  call dein#add('joshdick/onedark.vim')
+  call dein#add('mhinz/vim-janah')
+  call dein#add('jsfaint/gen_tags.vim')
+  call dein#end()
+  call dein#save_state()
+endif
 filetype plugin indent on
+syntax enable
 
-" install with
-" :PluginInsall
-
-" update with
-" :PluginUpdate
-
-" in neovim do this after install/update
-" :UpdateRemotePlugins
 
 
 
@@ -37,20 +35,22 @@ filetype plugin indent on
 " only start NERDTree when vim starts without file open
 autocmd VimEnter * if !argc() | NERDTree | endif
 
-" YouCompleteMe default config
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" nvim-completion-manager
+set shortmess+=c
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" close nerdtree if nothing else left
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
+" chromtica config
+let g:chromatica#highlight_feature_level = 1 "more syntax highlight
+let g:chromatica#enable_at_startup = 1
+
+" gen_tags autogenerate
+let g:gen_tags#gtags_auto_gen = 1
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+" nerdtree
+nmap <F7> :NERDTreeToggle<CR>
 
 
 
@@ -66,15 +66,6 @@ set hidden
 " a=activate mouse, r=activate copy/pasting from X
 set mouse-=a
 
-set number
-set ruler
-set showmatch
-
-" Detect filetype for indentation
-"if has("autocmd")
-"  filetype indent on
-"endif
-
 " Restore cursor position when reopening file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -84,7 +75,6 @@ endif
 set smartcase
 set ignorecase
 set wrapscan
-
 set preserveindent
 set shiftwidth=2
 set shiftround
@@ -92,12 +82,12 @@ set tabstop=2
 set softtabstop=2
 set expandtab
 set scrolloff=5
-
-" Get to the next line when hitting "right" at the end of the line
-"set whichwrap=<,>,[,]
-
-" Always stay on the same column
+set number
+set ruler
+set showmatch
+set cursorline
 set nostartofline
+
 
 
 
@@ -105,19 +95,15 @@ set nostartofline
 """"""""""""""""""" some UI stuff
 " airline config
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
-" enable the list of buffers
+let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
-" show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 " detect drak/light background
 set background=dark
-" color scheme
-let g:gruvbox_italic=1
-colorscheme gruvbox
-" Status bar format
+"set termguicolors
+colorscheme janah
+
 set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
-" Ruler formatting
 set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 
 
@@ -132,14 +118,10 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 
-
-
 """"""""""""""""""" key mapping
 " Buffer keybinds
 nnoremap <A-j> :bp<CR>
-nnoremap <A-Left> :bp<CR>
 nnoremap <A-k> :bn<CR>
-nnoremap <A-Right> :bn<CR>
 nnoremap <A-g> :e#<CR>
 nnoremap <A-1> :1b<CR>
 nnoremap <A-2> :2b<CR>
@@ -150,15 +132,10 @@ nnoremap <A-6> :6b<CR>
 nnoremap <A-7> :7b<CR>
 nnoremap <A-8> :8b<CR>
 nnoremap <A-9> :9b<CR>
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
 nnoremap <A-q> :bp<BAR> bd #<CR>
 
 " when pressing r, replace marked section with register
 vmap r "_dP
 
 set pastetoggle=<F5>
-nmap <F8> :TagbarToggle<CR>
-nmap <F7> :NERDTreeToggle<CR>
-
 
