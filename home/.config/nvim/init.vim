@@ -35,10 +35,6 @@ syntax enable
 " only start NERDTree when vim starts without file open
 autocmd VimEnter * if !argc() | NERDTree | endif
 
-" nvim-completion-manager
-set shortmess+=c
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " chromtica config
 let g:chromatica#highlight_feature_level = 1 "more syntax highlight
@@ -102,10 +98,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set background=dark
 "set termguicolors
 colorscheme janah
+" spell checking style
+hi clear SpellBad
+hi SpellBad cterm=underline
 
 set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
 set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
-
 
 
 
@@ -114,7 +112,7 @@ set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 cmap w!! %!sudo tee > /dev/null %
 
 " highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
 
@@ -132,10 +130,18 @@ nnoremap <A-6> :6b<CR>
 nnoremap <A-7> :7b<CR>
 nnoremap <A-8> :8b<CR>
 nnoremap <A-9> :9b<CR>
-nnoremap <A-q> :bp<BAR> bd #<CR>
+nnoremap <A-q> :bd<CR>
 
 " when pressing r, replace marked section with register
 vmap r "_dP
 
 set pastetoggle=<F5>
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"<Paste>
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+
 

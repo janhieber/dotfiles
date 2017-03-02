@@ -34,7 +34,8 @@ alias q='exit'
 alias gs='git status'
 alias ga='git add .'
 alias gc='git commit -m'
-alias gp='git push origin master'
+alias gp='git push'
+alias gpu='git pull'
 
 alias ..='cd ../'
 alias ...='cd ../../'
@@ -178,7 +179,7 @@ function prompt_ssh {
 }
 
 function prompt_chroot {
-  if [[ $(stat -c %i /) -ne 2 ]]; then
+  if [[ $(stat -c %i /) -gt 3 ]]; then
     if [[ -n $SCHROOT_SESSION_ID ]];then
       print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
     else
