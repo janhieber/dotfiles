@@ -1,0 +1,7 @@
+[user]
+	email = mail@janhieber.net
+	name = Jan Hieber
+[color]
+	ui = auto
+[push]
+	default = simple
