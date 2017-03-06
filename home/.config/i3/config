@@ -6,7 +6,7 @@ font pango:Sans 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym $mod+Return exec --no-startup-id st
 
 # kill focused window
 bindsym $mod+q kill

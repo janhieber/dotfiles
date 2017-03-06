@@ -126,6 +126,7 @@ cmap w!! %!sudo tee > /dev/null %
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
+
 function! CloseOnLast()
     let cnt = 0
     for i in range(0, bufnr("$"))
@@ -134,13 +135,13 @@ function! CloseOnLast()
         endif
     endfor
     if cnt <= 1
-        q
+        wq
     else
         bw
     endif
 endfunction
-
 nnoremap ZZ :call CloseOnLast()<CR>
+
 
 """"""""""""""""""" key mapping
 " Buffer keybinds

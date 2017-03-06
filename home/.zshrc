@@ -19,10 +19,10 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 ## alias declaration
 [[ -f /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
 if [[ -f /usr/bin/pacman ]]; then
-  if [[ -f /usr/bin/apacman ]]; then
-    alias p='apacman'
-    alias sp='apacman'
-  else
+  if [[ -f /usr/bin/pacaur ]]; then
+    alias p='pacaur'
+    alias sp='pacaur'
+else
     alias p='pacman'
     [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
   fi
@@ -59,9 +59,12 @@ done
 ## fix home/end buttons
 bindkey "^[[4~" end-of-line
 bindkey "^[[8~" end-of-line
+bindkey "^[[F" end-of-line
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[7~" beginning-of-line
+bindkey "^[[H" beginning-of-line
 bindkey "^[[3~" delete-char
+bindkey "^[[P" delete-char
 
 bindkey "^R" history-incremental-search-backward
 bindkey "^[[A" history-incremental-pattern-search-backward
@@ -74,7 +77,7 @@ bindkey "^[[B" history-incremental-pattern-search-forward
 ## completions
 # general auto complete
 autoload -Uz compinit
-compinit -C
+compinit
 # Turn on menu selection only when selections do not fit on screen.
 zstyle ':completion:*' menu select
 # Force rehash to have completion picking up new commands in path.
@@ -135,6 +138,11 @@ bindkey "\e\e" sudo-command-line
 # exports
 [[ -f /usr/bin/nvim ]] && EDITOR='nvim' || EDITOR='vim'
 export EDITOR
+
+nvim(){
+    tput smkx
+    command nvim $@
+}
 
 # ls colors
 autoload -U colors && colors
