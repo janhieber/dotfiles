@@ -15,13 +15,14 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('morhetz/gruvbox')
   call dein#add('bogado/file-line')
-  call dein#add('vivien/vim-linux-coding-style')
   call dein#add('roxma/nvim-completion-manager')
   call dein#add('roxma/clang_complete')
   call dein#add('arakashic/chromatica.nvim')
   call dein#add('joshdick/onedark.vim')
   call dein#add('mhinz/vim-janah')
   call dein#add('jsfaint/gen_tags.vim')
+  call dein#add('rhysd/vim-clang-format')
+  call dein#add('vim-scripts/DoxygenToolkit.vim')
   call dein#end()
   call dein#save_state()
 endif
@@ -48,7 +49,14 @@ nmap <F8> :TagbarToggle<CR>
 " nerdtree
 nmap <F7> :NERDTreeToggle<CR>
 
-
+" clang-format
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "BreakBeforeBraces" : "Stroustrup",
+            \ "IndentWidth" : 4}
 
 
 """"""""""""""""""" general stuff
@@ -72,12 +80,11 @@ set smartcase
 set ignorecase
 set wrapscan
 set preserveindent
-set shiftwidth=2
-set shiftround
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
-set scrolloff=5
+set scrolloff=10
+set softtabstop=4
 set number
 set ruler
 set showmatch
@@ -93,7 +100,11 @@ set nostartofline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':.'
+let g:airline#extensions#tabline#fnamecollapse = 0
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 " detect drak/light background
 set background=dark
 "set termguicolors
@@ -115,11 +126,30 @@ cmap w!! %!sudo tee > /dev/null %
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
+function! CloseOnLast()
+    let cnt = 0
+    for i in range(0, bufnr("$"))
+        if buflisted(i)
+            let cnt += 1
+        endif
+    endfor
+    if cnt <= 1
+        q
+    else
+        bw
+    endif
+endfunction
+
+nnoremap ZZ :call CloseOnLast()<CR>
 
 """"""""""""""""""" key mapping
 " Buffer keybinds
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 nnoremap <A-j> :bp<CR>
+nnoremap <Leader><Left> :bp<CR>
 nnoremap <A-k> :bn<CR>
+nnoremap <Leader><Right> :bn<CR>
 nnoremap <A-g> :e#<CR>
 nnoremap <A-1> :1b<CR>
 nnoremap <A-2> :2b<CR>
@@ -132,10 +162,12 @@ nnoremap <A-8> :8b<CR>
 nnoremap <A-9> :9b<CR>
 nnoremap <A-q> :bd<CR>
 
+"nnoremap ZZ :w<CR>:bd<CR>
+
 " when pressing r, replace marked section with register
 vmap r "_dP
 
 set pastetoggle=<F5>
 
 
-
+set tabstop=4 shiftwidth=4 expandtab

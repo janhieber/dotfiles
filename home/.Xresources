@@ -21,7 +21,8 @@ urxvt.matcher.button: 1
 urxvt.keysym.C-Delete: perl:matcher:last
 urxvt.keysym.M-Delete: perl:matcher:list
 urxvt.internalBorder: 10
-URxvt*pointerBlank: true
+urxvt*pointerBlank: true
+
 
 ! -----------------------------------------------------------------------------
 ! File: gruvbox-dark.xresources
