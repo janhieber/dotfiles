@@ -19,13 +19,13 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 ## alias declaration
 [[ -f /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
 if [[ -f /usr/bin/pacman ]]; then
-  if [[ -f /usr/bin/pacaur ]]; then
-    alias p='pacaur'
-    alias sp='pacaur'
-else
-    alias p='pacman'
-    [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
-  fi
+    if [[ -f /usr/bin/pacaur ]]; then
+        alias p='pacaur'
+        alias sp='pacaur'
+    else
+        alias p='pacman'
+        [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
+    fi
 fi
 
 alias c='clear'
@@ -50,10 +50,10 @@ alias ll='ls -lh --color=auto --group-directories-first'
 
 ## plugins
 for plugin in \
-  "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
-  "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+    "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 do
-  [[ -f $plugin ]] && source $plugin
+    [[ -f $plugin ]] && source $plugin
 done
 
 ## fix home/end buttons
@@ -72,7 +72,7 @@ bindkey "^[[B" history-incremental-pattern-search-forward
 
 ## damn kb speed is always resetting
 [[ $DISPLAY ]] && [[ -f /usr/bin/xset ]] && [[ "$(id -u)" -ne 0 ]] && \
-  /usr/bin/xset r rate 250 45
+    /usr/bin/xset r rate 250 45
 
 ## completions
 # general auto complete
@@ -83,14 +83,14 @@ zstyle ':completion:*' menu select
 # Force rehash to have completion picking up new commands in path.
 _force_rehash() { (( CURRENT == 1 )) && rehash; return 1 }
 zstyle ':completion:::::' completer _force_rehash \
-                                    _complete \
-                                    _ignored \
-                                    _approximate
+    _complete \
+    _ignored \
+    _approximate
 #                                    _gnu_generic
 zstyle ':completion:*'    completer _complete \
-                                    _ignored \
-                                    _gnu_generic \
-                                    _approximate
+    _ignored \
+    _gnu_generic \
+    _approximate
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 3 numeric
 setopt AUTO_CD
@@ -116,18 +116,18 @@ bindkey "^[[B" down-line-or-beginning-search
 
 ## pressing ESC two times toggles 'sudo' in front of cmd
 sudo-command-line() {
-  [[ -z $BUFFER ]] && zle up-history
-  if [[ $BUFFER == sudo\ * ]]; then
+[[ -z $BUFFER ]] && zle up-history
+if [[ $BUFFER == sudo\ * ]]; then
     LBUFFER="${LBUFFER#sudo }"
-  elif [[ $BUFFER == $EDITOR\ * ]]; then
+elif [[ $BUFFER == $EDITOR\ * ]]; then
     LBUFFER="${LBUFFER#$EDITOR }"
     LBUFFER="sudoedit $LBUFFER"
-  elif [[ $BUFFER == sudoedit\ * ]]; then
+elif [[ $BUFFER == sudoedit\ * ]]; then
     LBUFFER="${LBUFFER#sudoedit }"
     LBUFFER="$EDITOR $LBUFFER"
-  else
+else
     LBUFFER="sudo $LBUFFER"
-  fi
+fi
 }
 zle -N sudo-command-line
 # Defined shortcut keys: [Esc] [Esc]
@@ -139,6 +139,7 @@ bindkey "\e\e" sudo-command-line
 [[ -f /usr/bin/nvim ]] && EDITOR='nvim' || EDITOR='vim'
 export EDITOR
 
+# fix for alacritty
 nvim(){
     tput smkx
     command nvim $@
@@ -147,54 +148,56 @@ nvim(){
 # ls colors
 autoload -U colors && colors
 (( $+commands[dircolors] )) && eval "$(dircolors -b)"
- 
+
 ## functions for prompt
 function prompt_git_branch () {
-  git branch --no-color 2>/dev/null | \
-    sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' \
-      -e 's/(HEAD detached at //' -e 's/)//' \
-      -e 's/(detached from //';
-  return 0;
+    git branch --no-color 2>/dev/null | \
+        sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' \
+        -e 's/(HEAD detached at //' -e 's/)//' \
+        -e 's/(detached from //';
+    [[ $? -ne 0 ]] && print ''
 }
+
 function prompt_git_dirty() {
-  local STATUS=''
-  STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
-  if [[ -n $STATUS ]]; then
-    echo " *"
-  fi
+    local TMP=''
+    tmp=$(command git status --porcelain 2> /dev/null | tail -n1)
+    [[ -n $tmp ]] && print " *"
 }
+
 function prompt_git() {
-  if git status >/dev/null 2>&1; then
-    echo " %F{cyan}GIT[%f$(prompt_git_branch)%f%F{red}$(prompt_git_dirty)%f%F{cyan}]%f"
-  fi
+    local TMP=''
+    TMP=$(prompt_git_branch)
+    if [[ -n $TMP ]]; then
+        print " %F{cyan}GIT[%f${TMP}%f%F{red}$(prompt_git_dirty)%f%F{cyan}]%f"
+    fi
 }
 
 function prompt_char {
-  [[ $UID -eq 0 ]] && print ' %F{red}#%f' || print ' >'
+    [[ $UID -eq 0 ]] && print ' %F{red}#%f' || print ' >'
 }
 
 function prompt_shlvl {
-  # print fork symbol when in subshell
-  # we need to tell zsh that fork symbol is width=1
-  [[ $SHLVL -gt 2 ]] && echo -e "%1{\xE2\x8B\x94%} "
+    # print fork symbol when in subshell
+    # we need to tell zsh that fork symbol is width=1
+    [[ $SHLVL -gt 2 ]] && echo -e "%1{\xE2\x8B\x94%} "
 }
 
 function prompt_ecode {
-  print "%(?..%F{red}%? %f)"
+    print "%(?..%F{red}%? %f)"
 }
 
 function prompt_ssh {
-  [[ -n $SSH_CONNECTION ]] && print "%n@%m"
+    [[ -n $SSH_CONNECTION ]] && print "%n@%m"
 }
 
 function prompt_chroot {
-  if [[ $(stat -c %i /) -gt 3 ]]; then
-    if [[ -n $SCHROOT_SESSION_ID ]];then
-      print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
-    else
-       print "%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
+    if [[ $(stat -c %i /) -gt 3 ]]; then
+        if [[ -n $SCHROOT_SESSION_ID ]];then
+            print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
+        else
+            print "%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
+        fi
     fi
-  fi
 }
 
 ## prompt
@@ -206,12 +209,12 @@ RPROMPT='$(prompt_shlvl)$(prompt_ecode)%~'
 
 # fix some chroot stuff
 if [[ $SCHROOT_SESSION_ID ]]; then
-  [[ $TERM = "rxvt-unicode-256color" ]] && export TERM='rxvt-unicode'
-  if [[ "$(id -u)" -eq 0 ]]; then
-    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-  else
-    PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
-  fi
-  export PATH
+    [[ $TERM = "rxvt-unicode-256color" ]] && export TERM='rxvt-unicode'
+    if [[ "$(id -u)" -eq 0 ]]; then
+        PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    else
+        PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+    fi
+    export PATH
 fi
 
