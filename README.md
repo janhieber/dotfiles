@@ -1,27 +1,16 @@
 # dotfiles
 
-Clone it to home folder and execute the script to link the configs.
-```bash
-cd ~
-git clone https://github.com/janhieber/dotfiles.git
-./dotfiles/makelinks.sh
-```
-It'll ask you before deleting your files ;)
+The way I manage this is described [here](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
-This is how the desktop looks like  
-(yes I like pastel colors, the oldschool look and a minimal prompt)
+Short description:
+- the dotfiles repo is cloned as bare repo in ``~/.dotfiles``
+- then you tell git that the work tree is your ``~``
+- untracked files are simply ignored
+- to track a file, simply add it to the repo
+- to make this easier, an alias is used: ``alias config git --git-dir=$HOME/.cfg/ --work-tree=$HOME``
 
-![preview](https://raw.githubusercontent.com/janhieber/dotfiles/master/scrot.png)
+[Install to new machine](.bin/install.sh)
 
-# before you ask  
-wm: i3  
-bar: polybar  
-terminal: urxvt  
-shell: zsh
-
-Colors are from [gruvbox](https://github.com/morhetz/gruvbox).  
-I got i3 and polybar to use the colors from [.Xressources](/home/.Xresources),
-spares some work when changing colors.
 
 # lockscreen
 I have written a [script](/home/.bin/i3lock-fancy.sh) that makes a blurry
