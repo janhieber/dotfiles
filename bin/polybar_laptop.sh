@@ -16,5 +16,5 @@ while read line; do
     MONITOR="$line" polybar -q -c $CFG main &
 done
 
-feh --no-fehbg --bg-tile ~/dotfiles/bg.png
+feh --no-fehbg --bg-tile ~/bg.png
 

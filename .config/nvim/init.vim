@@ -137,7 +137,8 @@ function! CloseOnLast()
     if cnt <= 1
         wq
     else
-        bw
+        w
+        bd
     endif
 endfunction
 nnoremap ZZ :call CloseOnLast()<CR>
@@ -171,4 +172,3 @@ vmap r "_dP
 set pastetoggle=<F5>
 
 
-set tabstop=4 shiftwidth=4 expandtab

@@ -7,7 +7,7 @@
  */
 static char font[] = "monospace:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 2;
-#define histsize 2000
+#define histsize 10000
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -157,8 +157,14 @@ static unsigned int defaultattr = 11;
  */
 static MouseShortcut mshortcuts[] = {
 	/* button               mask            string */
-	{ Button4,              XK_ANY_MOD,     "\031" },
-	{ Button5,              XK_ANY_MOD,     "\005" },
+	{ Button4,              XK_NO_MOD,     "\031" },
+	{ Button5,              XK_NO_MOD,     "\005" },
+};
+
+static MouseKey mkeys[] = {
+	/* button               mask            function        argument */
+	{ Button4,              ShiftMask,      kscrollup,      {.i =  10} },
+	{ Button5,              ShiftMask,      kscrolldown,    {.i =  10} },
 };
 
 /* Internal keyboard shortcuts. */

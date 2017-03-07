@@ -119,7 +119,7 @@ bindsym $mod+r mode "resize"
 
 
 # load startup apps
-exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
+exec --no-startup-id ~/bin/startup_`hostname`.sh
 
 # import xressources
 set_from_resource $bg background #000000

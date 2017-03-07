@@ -1,63 +1,45 @@
-" This minimal config is for small machines with not
-" much power.
+filetype indent on
+syntax enable
+
+
+""""""""""""""""""" general stuff
+" Use X clipoboard
+set clipboard=unnamedplus
 
 " a=activate mouse, r=activate copy/pasting from X
-set mouse=""
-
-set number
-set ruler
-set showmatch
-
-filetype indent on
+set mouse-=a
 
 set smartcase
 set ignorecase
 set wrapscan
-
 set preserveindent
-set shiftwidth=2
-set shiftround
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
-set scrolloff=5
-
-" Always stay on the same column
+set scrolloff=10
+set softtabstop=4
+set number
+set ruler
+set showmatch
+set cursorline
 set nostartofline
-
 
 
 
 """"""""""""""""""" some UI stuff
 " detect drak/light background
 set background=dark
-" color scheme
+"set termguicolors
 colorscheme default
-" Status bar format
+" spell checking style
+
 set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
-" Ruler formatting
 set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 
 
-
-
 """"""""""""""""""" some special stuff and hacks
-" Get root privilieges while editing a file
-cmap w!! %!sudo tee > /dev/null %
-
 " highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
-
-
-
-""""""""""""""""""" key mapping
-" set leader key
-let mapleader=","
-
-" when pressing r, replace marked section with register
-vmap r "_dP
-
-set pastetoggle=<F5>
 
