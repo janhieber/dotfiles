@@ -33,6 +33,10 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -lh --color=auto --group-directories-first'
 
+# this is how I manage the dotfiles
+# see: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 
 ## other stuff
 # exports
