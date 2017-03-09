@@ -15,14 +15,19 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('morhetz/gruvbox')
   call dein#add('bogado/file-line')
-  call dein#add('roxma/nvim-completion-manager')
-  call dein#add('roxma/clang_complete')
   call dein#add('arakashic/chromatica.nvim')
   call dein#add('joshdick/onedark.vim')
   call dein#add('mhinz/vim-janah')
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
   call dein#add('vim-scripts/DoxygenToolkit.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-clang')
+  call dein#add('zchee/deoplete-jedi')
+  call dein#add('sebastianmarkow/deoplete-rust')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('lervag/vimtex')
   call dein#end()
   call dein#save_state()
 endif
@@ -36,6 +41,15 @@ syntax enable
 " only start NERDTree when vim starts without file open
 autocmd VimEnter * if !argc() | NERDTree | endif
 
+" airline config
+let g:airline_powerline_fonts = 1
+let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':.'
+let g:airline#extensions#tabline#fnamecollapse = 0
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " chromtica config
 let g:chromatica#highlight_feature_level = 1 "more syntax highlight
@@ -58,6 +72,12 @@ let g:clang_format#style_options = {
             \ "BreakBeforeBraces" : "Stroustrup",
             \ "IndentWidth" : 4}
 
+
+" Use deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#executable = "/usr/bin/clang"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/"
 
 """"""""""""""""""" general stuff
 " Use X clipoboard
@@ -96,15 +116,6 @@ set nostartofline
 
 
 """"""""""""""""""" some UI stuff
-" airline config
-let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#fnamemod = ':.'
-let g:airline#extensions#tabline#fnamecollapse = 0
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 " detect drak/light background
 set background=dark
 "set termguicolors

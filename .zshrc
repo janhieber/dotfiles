@@ -50,14 +50,32 @@ alias ll='ls -lh --color=auto --group-directories-first'
 # this is how I manage the dotfiles
 # see: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# calculator
+function =
+{
+    echo "$@" | bc -l
+}
+alias calc="="
 
 ## plugins
-for plugin in \
-    "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
-    "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-do
+for plugin in /usr/share/zsh/plugins/*/*.*sh $HOME/.zsh/*.*sh; do
     [[ -f $plugin ]] && source $plugin
 done
+
+
+#colored man pages
+function man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+        PAGER="${commands[less]:-$PAGER}" \
+        _NROFF_U=1 man "$@"
+}
 
 ## fix home/end buttons
 bindkey "^[[4~" end-of-line
@@ -72,6 +90,9 @@ bindkey "^[[P" delete-char
 bindkey "^R" history-incremental-search-backward
 bindkey "^[[A" history-incremental-pattern-search-backward
 bindkey "^[[B" history-incremental-pattern-search-forward
+
+bindkey '^[[1;5A' history-substring-search-up
+bindkey '^[[1;5B' history-substring-search-down
 
 ## damn kb speed is always resetting
 [[ $DISPLAY ]] && [[ -f /usr/bin/xset ]] && [[ "$(id -u)" -ne 0 ]] && \
@@ -117,23 +138,16 @@ bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
 
-## pressing ESC two times toggles 'sudo' in front of cmd
+# pressing ESC two times toggles 'sudo' in front of cmd
 sudo-command-line() {
-[[ -z $BUFFER ]] && zle up-history
-if [[ $BUFFER == sudo\ * ]]; then
-    LBUFFER="${LBUFFER#sudo }"
-elif [[ $BUFFER == $EDITOR\ * ]]; then
-    LBUFFER="${LBUFFER#$EDITOR }"
-    LBUFFER="sudoedit $LBUFFER"
-elif [[ $BUFFER == sudoedit\ * ]]; then
-    LBUFFER="${LBUFFER#sudoedit }"
-    LBUFFER="$EDITOR $LBUFFER"
-else
-    LBUFFER="sudo $LBUFFER"
-fi
+    [[ -z $BUFFER ]] && zle up-history
+    if [[ $BUFFER == sudo\ * ]]; then
+        LBUFFER="${LBUFFER#sudo }"
+    else
+        LBUFFER="sudo $LBUFFER"
+    fi
 }
 zle -N sudo-command-line
-# Defined shortcut keys: [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
 
 
