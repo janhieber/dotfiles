@@ -58,10 +58,11 @@ function =
 alias calc="="
 
 ## plugins
+setopt null_glob
 for plugin in /usr/share/zsh/plugins/*/*.*sh $HOME/.zsh/*.*sh; do
     [[ -f $plugin ]] && source $plugin
 done
-
+unsetopt null_glob
 
 #colored man pages
 function man() {
