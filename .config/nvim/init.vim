@@ -37,6 +37,28 @@ syntax enable
 
 
 
+""""""""""""""""""" some UI stuff
+" detect drak/light background
+set background=dark
+"set termguicolors
+colorscheme janah
+
+
+highlight Pmenu ctermfg=black ctermbg=darkcyan
+highlight PmenuSel ctermfg=white ctermbg=darkcyan
+
+
+" spell checking style
+hi clear SpellBad
+hi SpellBad cterm=underline
+
+set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
+set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
+
+
+
+
+
 """"""""""""""""""" plugin configs
 " only start NERDTree when vim starts without file open
 autocmd VimEnter * if !argc() | NERDTree | endif
@@ -47,7 +69,7 @@ let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamemod = ':.'
-let g:airline#extensions#tabline#fnamecollapse = 0
+let g:airline#extensions#tabline#fnamecollapse = 1
 "let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -110,22 +132,6 @@ set ruler
 set showmatch
 set cursorline
 set nostartofline
-
-
-
-
-
-""""""""""""""""""" some UI stuff
-" detect drak/light background
-set background=dark
-"set termguicolors
-colorscheme janah
-" spell checking style
-hi clear SpellBad
-hi SpellBad cterm=underline
-
-set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
-set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 
 
 
