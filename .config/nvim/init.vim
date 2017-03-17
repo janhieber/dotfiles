@@ -8,16 +8,21 @@ set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.config/nvim/dein')
   call dein#begin('~/.config/nvim/dein')
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
+  " UI style/theme
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('majutsushi/tagbar')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('morhetz/gruvbox')
-  call dein#add('bogado/file-line')
   call dein#add('arakashic/chromatica.nvim')
-  call dein#add('joshdick/onedark.vim')
   call dein#add('mhinz/vim-janah')
+  call dein#add('jnurmine/Zenburn')
+  call dein#add('joshdick/onedark.vim')
+  " UI enhancement
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('majutsushi/tagbar')
+  " usability improvement
+  call dein#add('bogado/file-line')
+  " programming support
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
   call dein#add('vim-scripts/DoxygenToolkit.vim')
@@ -34,7 +39,9 @@ endif
 filetype plugin indent on
 syntax enable
 
-
+" :call dein#install()
+" :call dein#update()
+" :UpdateRemotePlugins
 
 
 """"""""""""""""""" plugin configs
@@ -43,7 +50,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 
 " airline config
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
+let g:airline_theme='zenburn'
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamemod = ':.'
@@ -53,7 +60,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " chromtica config
 let g:chromatica#highlight_feature_level = 1 "more syntax highlight
-let g:chromatica#enable_at_startup = 1
+let g:chromatica#enable_at_startup = 0
 
 " gen_tags autogenerate
 let g:gen_tags#gtags_auto_gen = 1
@@ -119,7 +126,7 @@ set nostartofline
 " detect drak/light background
 set background=dark
 "set termguicolors
-colorscheme janah
+colorscheme zenburn
 " spell checking style
 hi clear SpellBad
 hi SpellBad cterm=underline
