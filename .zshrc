@@ -43,7 +43,7 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias -g L='| less'
 alias -g G='| grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d,html,js,map}'
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -lh --color=auto --group-directories-first'
 
