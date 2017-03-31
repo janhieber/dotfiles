@@ -33,7 +33,7 @@ alias q='exit'
 
 alias gs='git status'
 alias ga='git add'
-alias gaa='git add --all'
+alias gaa='git add -u'
 alias gc='git commit -m'
 alias gp='git push'
 alias gpu='git pull'
