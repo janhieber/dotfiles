@@ -70,6 +70,7 @@ set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 " only start NERDTree when vim starts without file open
 autocmd VimEnter * if !argc() | NERDTree | endif
 
+
 " airline config
 let g:airline_powerline_fonts = 1
 let g:airline_theme='zenburn'
@@ -107,6 +108,9 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#executable = "/usr/bin/clang"
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/"
+
+" vimtex
+let g:tex_flavor = 'latex'
 
 """"""""""""""""""" general stuff
 " Use X clipoboard

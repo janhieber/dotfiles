@@ -149,4 +149,15 @@ client.focused_inactive $color0 $color0 $color8 $color0
 client.unfocused $color0 $color0 $color8 $color0
 client.urgent $color1 $color1 $foreground $color0
 
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
 

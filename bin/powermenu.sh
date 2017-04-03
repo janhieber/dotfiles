@@ -8,7 +8,7 @@ function sure {
 }
 
 [[ $res = "suspend" ]]   && systemctl suspend
-[[ $res = "lock" ]]      && ~/.bin/i3lock-fancy.sh
+[[ $res = "lock" ]]      && ~/bin/i3lock-fancy.sh
 [[ $res = "logout" ]]    && sure $res 'i3-msg exit'
 [[ $res = "reboot" ]]    && sure $res 'systemctl reboot'
 [[ $res = "shutdown" ]]  && sure $res 'systemctl poweroff'

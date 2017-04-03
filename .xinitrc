@@ -1,7 +1,7 @@
 #!/bin/sh
 
 xrdb -merge $HOME/.Xresources
-xset s 3600 3600
+xset s off -dpms
 xset r rate 250 45
 numlockx on
 
