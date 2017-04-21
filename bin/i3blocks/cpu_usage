@@ -1,0 +1,6 @@
+#!/bin/sh
+LC_ALL=en_US.UTF8
+
+IDLE=$(mpstat 1 1 | tail -n 1 | awk '{print $12}')
+
+

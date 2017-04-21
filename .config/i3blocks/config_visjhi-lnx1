@@ -78,9 +78,9 @@ interval=15
 
 
 [cpu_usage]
-command=~/scripts/i3blocks/cpu_usage
+command=~/bin/i3blocks/cpu_usage
 label=CPU:
-interval=10
+interval=3
 min_width=CPU: 100%
 #separator=false
 

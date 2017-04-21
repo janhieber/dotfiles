@@ -48,7 +48,7 @@ syntax enable
 " detect drak/light background
 set background=dark
 "set termguicolors
-colorscheme janah
+colorscheme zenburn
 
 
 highlight Pmenu ctermfg=black ctermbg=darkcyan
