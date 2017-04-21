@@ -152,7 +152,7 @@ format-muted-prefix-foreground = ${colors.foreground-alt}
 
 [module/avg-battery]
 type = custom/script
-exec = /usr/bin/env sh -c /home/jan/.bin/batlive.sh
+exec = /usr/bin/env sh -c /home/jan/bin/batlive.sh
 interval = 20
 format-prefix = "BAT: "
 format-prefix-foreground = ${colors.foreground-alt}

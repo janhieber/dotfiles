@@ -12,7 +12,7 @@ xrandr --addmode DP-2 '1920x1200_60.00'
 compton -b
 
 # launch some apps
-gnome-keyring-daemon --start --components=secrets -d --unlock
+gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 nm-applet &
 nextcloud &
 dunst &

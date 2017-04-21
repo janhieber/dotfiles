@@ -1,5 +1,6 @@
 #!/bin/sh
 
+setxkbmap -option ctrl:nocaps
 xrdb -merge $HOME/.Xresources
 xset s off -dpms
 xset r rate 250 45

@@ -6,7 +6,7 @@ font pango:Sans 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym $mod+Return exec --no-startup-id st
 
 # kill focused window
 bindsym $mod+q kill
@@ -22,14 +22,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
 bindsym XF86AudioMute exec --no-startup-id pamixer -t
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/.bin/brightness.sh up
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.bin/brightness.sh down
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
-bindsym $mod+Print exec --no-startup-id ~/.bin/i3lock-fancy.sh
+bindsym $mod+Print exec --no-startup-id ~/bin/powermenu.sh
 
-bindsym $mod+Shift+m move workspace to output right
+bindsym $mod+Mod1+Right move workspace to output right
+bindsym $mod+Mod1+Left move workspace to output left
 
 # change focus
 bindsym $mod+h focus left
@@ -122,7 +123,7 @@ bindsym $mod+r mode "resize"
 include ./config_`hostname`
 
 # load startup apps
-exec --no-startup-id ~/dotfiles/startup_`hostname`.sh
+exec --no-startup-id ~/bin/startup_`hostname`.sh
 
 # import xressources
 set_from_resource $background background #000000
@@ -153,6 +154,7 @@ client.urgent $color1 $color1 $foreground $color0
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    status_command i3blocks -c .config/i3/i3blocks_laptop.conf
     position top
     colors {
         statusline #ffffff
