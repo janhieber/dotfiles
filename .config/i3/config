@@ -147,7 +147,7 @@ set_from_resource $color14 color14 #000000
 set_from_resource $color15 color15 #000000
 set $colorA #3a3a3a
 
-#              <border> <background> <text> <indicator> <child_border>
+#                       <border> <backg>  <text>  <indicator> <child_border>
 client.focused          $color12 $color12 $color0 $color0
 client.focused_inactive $colorA  $colorA  $color8 $color0
 client.unfocused        $colorA  $colorA  $color8 $color0
@@ -155,4 +155,16 @@ client.urgent           $color1  $color1  $fg     $color0
 
 client.background       #ffffff
 
+bar {
+  status_command i3blocks -c ~/.config/i3blocks/config_`hostname`
+  tray_output primary
+  position top
+  colors {
+    background $bg
+    statusline $fg
+    focused_workspace #83A598 #83A598 $bg
+    active_workspace #83A598 #83A598 $bg
+    inactive_workspace $bg $bg $fg
+  }
+}
 
