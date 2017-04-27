@@ -1,0 +1,20 @@
+#!/bin/sh
+
+CRITICAL=70
+WARNING=60
+
+# get temp
+export LC_ALL=en_US.UTF8
+TEMP=$(acpi -t | awk '{print $4}')
+TEMP=$(echo "${TEMP}/1" | bc)
+
+# output text
+echo "${TEMP} °C"
+echo "${TEMP} °C"
+
+# print color, if needed
+[[ ${TEMP} -gt ${CRITICAL} ]] && echo "#FF2C28" && exit 0
+[[ ${TEMP} -gt ${WARNING} ]] && echo "#FFAD2D" && exit 0
+
+exit 0
+

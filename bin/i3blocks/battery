@@ -1,0 +1,21 @@
+#!/bin/sh
+
+CRITICAL=5
+WARNING=15
+
+BAT="${BLOCK_INSTANCE:-0}"
+
+# get battery
+export LC_ALL=en_US.UTF8
+LEVEL=$(acpi -b | grep "Battery ${BAT}" | cut -d ',' -f 2 | tr -d "% ")
+
+# output text
+echo "${LEVEL}%"
+echo "${LEVEL}%"
+
+# print color, if needed
+[[ ${LEVEL} -lt ${CRITICAL} ]] && echo "#FF2C28" && exit 0
+[[ ${LEVEL} -lt ${WARNING} ]] && echo "#FFAD2D" && exit 0
+
+exit 0
+

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+
+# get wifi info
+export LC_ALL=en_US.UTF8
+INFO=$(iw wlp3s0 link)
+
+# output text
+if [[ "$INFO" == "Not connected." ]]
+then
+    echo "down"
+    echo "down"
+else
+    SSID=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"SSID:") {print $(i+1)}}}')
+    BRATE=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"bitrate:") {print $(i+1), $(i+2)}}}')
+    SIGNAL=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"signal:") {print $(i+1), $(i+2)}}}')
+    TEXT="${SSID}@[${BRATE}, ${SIGNAL}]"
+    echo ${TEXT}
+    echo ${TEXT}
+fi
+
+exit 0
+

@@ -1,9 +1,6 @@
-#https://github.com/esphen/dotfiles/blob/master/.config/sway/config
-
-
 set $mod Mod4
 
-font pango:Sans 12
+font pango:Sans 13
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -23,6 +20,11 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
 bindsym XF86AudioMute exec --no-startup-id pamixer -t
+
+# media keys
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
@@ -120,49 +122,28 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-
-
-# include host config
 include ./config_`hostname`
 
 # load startup apps
 exec --no-startup-id ~/bin/startup_`hostname`.sh
 
-# import xressources
-set_from_resource $background background #000000
-set_from_resource $foreground foreground #000000
-set_from_resource $color0 color0 #000000
-set_from_resource $color1 color1 #000000
-set_from_resource $color2 color2 #000000
-set_from_resource $color3 color3 #000000
-set_from_resource $color4 color4 #000000
-set_from_resource $color5 color5 #000000
-set_from_resource $color6 color6 #000000
-set_from_resource $color7 color7 #000000
-set_from_resource $color8 color8 #000000
-set_from_resource $color9 color9 #000000
-set_from_resource $color10 color10 #000000
-set_from_resource $color11 color11 #000000
-set_from_resource $color12 color12 #000000
-set_from_resource $color13 color13 #000000
-set_from_resource $color14 color14 #000000
-set_from_resource $color15 color15 #000000
+#                       <border> <backg>  <text>  <indicator> <child_border>
+client.focused          #333333 #6ca0a3 #222222 #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
 
-client.focused $color12 $color12 $color0 $color0
-client.focused_inactive $color0 $color0 $color8 $color0
-client.unfocused $color0 $color0 $color8 $color0
-client.urgent $color1 $color1 $foreground $color0
-
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    status_command i3blocks -c .config/i3/i3blocks_laptop.conf
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+  status_command i3blocks -c ~/.config/i3blocks/config_`hostname`
+  tray_output primary
+  position top
+  colors {
+    background #000000
+    statusline #6CA0A3
+    focused_workspace  #222222 #6ca0a3
+    active_workspace   #222222 #6ca0a3
+    inactive_workspace #888888 #222222
+    urgent_workspace   #222222 #cc9393
+  }
 }
 

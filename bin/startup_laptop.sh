@@ -10,6 +10,7 @@ xrandr --addmode DP-2 '1920x1200_60.00'
 # setup displays
 autorandr -c --default default
 
+feh --no-fehbg --bg-tile ~/bg.png
 compton -b
 
 # launch some apps
