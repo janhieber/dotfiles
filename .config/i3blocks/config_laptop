@@ -1,0 +1,85 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[volume]
+label=VOL
+instance=Master
+#instance=PCM
+interval=once
+signal=10
+
+
+[disk]
+label=/:
+instance=/
+interval=30
+separator=false
+
+[disk]
+label=/ssd:
+instance=/ssd
+interval=30
+
+[wifi]
+command=~/bin/i3blocks/wifi
+label=WLAN:
+instance=wlp3s0
+interval=10
+
+[battery]
+command=~/bin/i3blocks/battery
+label=BAT:
+signal=12
+interval=0
+
+[temperature]
+command=~/bin/i3blocks/temperature
+label=TEMP:
+interval=10
+
+[memory]
+command=~/bin/i3blocks/memory
+label=MEM:
+interval=10
+
+[cpu_usage]
+command=~/bin/i3blocks/cpu_usage
+label=CPU:
+interval=-2
+min_width=CPU: 100%
+
+[load_average]
+label=LOAD:
+interval=10
+
+[time]
+command=date '+%a %d. %b %H:%M'
+interval=20
+
