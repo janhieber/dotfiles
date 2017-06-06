@@ -12,17 +12,14 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
-  call dein#add('morhetz/gruvbox')
-  call dein#add('arakashic/chromatica.nvim')
-  call dein#add('mhinz/vim-janah')
   call dein#add('jnurmine/Zenburn')
-  call dein#add('joshdick/onedark.vim')
   " UI enhancement
   call dein#add('scrooloose/nerdtree')
   call dein#add('majutsushi/tagbar')
   " usability improvement
   call dein#add('bogado/file-line')
   " programming support
+  call dein#add('tpope/vim-fugitive')
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
   call dein#add('vim-scripts/DoxygenToolkit.vim')
