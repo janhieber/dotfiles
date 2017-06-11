@@ -28,12 +28,23 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-[volume]
-label=VOL
-instance=Master
-#instance=PCM
+
+[music_previous]
+instance=previous
+command=~/bin/i3blocks/playerctl.sh
 interval=once
-signal=10
+separator=false
+
+[music_play-pause]
+instance=play-pause
+command=~/bin/i3blocks/playerctl.sh
+interval=once
+separator=false
+
+[music_next]
+instance=next
+command=~/bin/i3blocks/playerctl.sh
+interval=once
 
 
 [disk]
@@ -56,8 +67,7 @@ interval=10
 [battery]
 command=~/bin/i3blocks/battery
 label=BAT:
-signal=12
-interval=0
+interval=15
 
 [temperature]
 command=~/bin/i3blocks/temperature

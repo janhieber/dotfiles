@@ -1,49 +1,65 @@
 #!/bin/bash
 
+# minutes
 CRITICAL=5
 WARNING=15
 
 # this works in combination with
 # https://github.com/janhieber/batmon
 
-# get battery
 export LC_ALL=en_US.UTF8
-TEXT=""
-while read line
-do
-    VALUE=$(echo $line | cut -d ',' -f 2 | tr -d "% ")
-    if [[ -z $VALUE ]]
-    then
-        TEXT="${TEXT}-/"
-    else
-        TEXT="${TEXT}${VALUE}%/"
-    fi
-done <<< $(acpi -b)
+INFO=$(upower -i '/org/freedesktop/UPower/devices/DisplayDevice')
+STATE=$(echo ${INFO} | awk '{for(i=1;i<=NF;i++) {if($i~"state:") {print $(i+1)}}}')
+LEVEL=$(echo ${INFO} | awk '{for(i=1;i<=NF;i++) {if($i~"percentage:") {print $(i+1)}}}')
+LEVEL=${LEVEL%.*}
 
-TEXT=${TEXT::-1}
+case ${STATE} in
+    discharging)
+        LIFE=$(echo ${INFO} | awk '{for(i=1;i<=NF;i++) {if($i~"empty:") {print $(i+1)}}}')
+        LIFEUNIT=$(echo ${INFO} | awk '{for(i=1;i<=NF;i++) {if($i~"empty:") {print $(i+2)}}}')
+        case ${LIFEUNIT} in
+            hours)
+                HOURS=${LIFE%.*}
+                MINUTES=$(echo "(60*(${LIFE}-${HOURS}))/1" | bc)
+                ;;
+            minutes)
+                HOURS=0
+                MINUTES=${LIFE%.*}
+                ;;
+            *)
+                echo "ERR"
+                ;;
+        esac
+        INFO=$(printf '%i:%02i' ${HOURS} ${MINUTES})
+        # warning color
+        if [[ ${HOURS} -eq 0 ]]
+        then
+            if [[ ${MINUTES} -lt ${CRITICAL} ]]
+            then
+                EXTRA="#FF2C28"
+            elif [[ ${MINUTES} -lt ${WARNING} ]]
+            then
+                EXTRA="#FFAD2D"
+            fi
+        fi
+        ;;
 
-# get runtime in minutes
-RUNTIME=$(cat /tmp/batmon.txt)
+    charging)
+        INFO='CHR'
+        ;;
 
-if [[ ${RUNTIME} -lt 0 ]]
-then
-    TEXT="${TEXT} (CHR)"
-else
-    let MINUTES=RUNTIME%60
-    let HOURS=RUNTIME/60
-    TEXT="${TEXT} $(printf '(%i:%02i)' ${HOURS} ${MINUTES})"
-fi
+    fully-charged)
+        INFO='FULL'
+        ;;
 
-# print text
-echo ${TEXT}
-echo ${TEXT}
+    *)
+        INFO='ERR'
+        ;;
+esac
 
-# print color, if needed
-if [[ ${RUNTIME} -ne -1 ]]
-then
-    [[ ${RUNTIME} -lt ${CRITICAL} ]] && echo "#FF2C28" && exit 0
-    [[ ${RUNTIME} -lt ${WARNING} ]] && echo "#FFAD2D" && exit 0
-fi
+echo "${LEVEL} % (${INFO})"
+echo "${LEVEL} % (${INFO})"
+[[ -n ${EXTRA} ]] && echo ${EXTRA}
 
 exit 0
 
