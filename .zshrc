@@ -177,6 +177,7 @@ function prompt_git_branch () {
 }
 
 function prompt_git_dirty() {
+    exit 0
     local TMP=''
     tmp=$(command git status --porcelain 2> /dev/null | tail -n1)
     [[ -n $tmp ]] && print " *"
