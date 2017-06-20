@@ -7,9 +7,12 @@ Short description:
 - then you tell git that the work tree is your $HOME
 - untracked files are simply ignored
 - to track a file, simply add it to the repo
-- to make this easier, an alias is used: ``alias config git --git-dir=$HOME/.cfg/ --work-tree=$HOME``
+- to make this easier, an alias is used: ``alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"``
 - stage all changes with ``config add -u``
 
-[Install to new machine](.bin/install.sh)
-
+```bash
+git clone --bare https://github.com/janhieber/dotfiles.git .dotfiles
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+config checkout origin master
+```
 
