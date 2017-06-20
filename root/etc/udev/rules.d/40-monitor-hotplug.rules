@@ -1,2 +1,0 @@
-ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/su -s /bin/sh - jan /home/jan/.bin/autorandr.sh"
-

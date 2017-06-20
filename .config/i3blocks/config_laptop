@@ -31,19 +31,19 @@ markup=none
 
 [music_previous]
 instance=previous
-command=~/bin/i3blocks/playerctl.sh
+command=~/bin/i3blocks/playerctl
 interval=once
 separator=false
 
 [music_play-pause]
 instance=play-pause
-command=~/bin/i3blocks/playerctl.sh
+command=~/bin/i3blocks/playerctl
 interval=once
 separator=false
 
 [music_next]
 instance=next
-command=~/bin/i3blocks/playerctl.sh
+command=~/bin/i3blocks/playerctl
 interval=once
 
 

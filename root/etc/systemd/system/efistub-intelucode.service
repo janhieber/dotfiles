@@ -1,6 +1,0 @@
-[Unit]
-Description=Copy intelucode to UEFISYS Partition
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/cp -f /boot/intel-ucode.img /boot/efi/EFI/arch/intel-ucode.img

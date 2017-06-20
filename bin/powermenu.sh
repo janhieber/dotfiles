@@ -14,7 +14,7 @@ function sure {
 [[ $res = "reboot" ]]    && sure $res 'systemctl reboot'
 [[ $res = "reboot to windows" ]]    && sure "$res" 'sudo /usr/local/bin/reboot-windows'
 [[ $res = "shutdown" ]]  && sure $res 'systemctl poweroff'
-[[ $res = "hibernate" ]] && sure %res 'systemctl hibernate'
+[[ $res = "hibernate" ]] && sure $res 'systemctl hibernate'
 
 exit 0
 
