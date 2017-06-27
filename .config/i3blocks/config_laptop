@@ -27,7 +27,7 @@
 command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
-
+color=#1793d0
 
 [music_previous]
 instance=previous
