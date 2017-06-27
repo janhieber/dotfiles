@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock the screen before suspend for user
+#Before=systemd-suspend.service
+Before=sleep.target
+
+[Service]
+Type=forking
+User=jan
+Environment=DISPLAY=:0
+ExecStart=/home/jan/bin/i3lock-fancy.sh
+
+[Install]
+WantedBy=sleep.target
+

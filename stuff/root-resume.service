@@ -1,0 +1,11 @@
+[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/bin/su -s /bin/sh - jan /home/jan/bin/autorandr.sh
+ExecStart=/usr/bin/systemctl restart upower.service
+
+[Install]
+WantedBy=suspend.target
