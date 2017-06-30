@@ -2,7 +2,8 @@
 
 xsetroot -bg #000000
 
-vmware-user-suid-wrapper &
+#vmware-user-suid-wrapper &
+VBoxClient-all
 dunst &
 
 profile-cleaner f &

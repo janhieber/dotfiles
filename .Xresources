@@ -9,7 +9,7 @@ Xft.dpi: 96
 
 !! urxvt setting
 urxvt.perl-ext:
-urxvt.font: xft:monospace:size=12
+urxvt.font: xft:monospace:pixelsize=12
 urxvt.scrollBar: false
 urxvt.urgentOnBell: true
 urxvt.title: terminal
@@ -20,7 +20,7 @@ urxvt.url-launcher: /usr/bin/xdg-open
 urxvt.matcher.button: 1
 urxvt.keysym.C-Delete: perl:matcher:last
 urxvt.keysym.M-Delete: perl:matcher:list
-urxvt.internalBorder: 10
+urxvt.internalBorder: 2
 urxvt*pointerBlank: true
 
 !! zenburn colors
