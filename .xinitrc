@@ -1,7 +1,9 @@
 #!/bin/sh
 
-~/bin/i3lock-fancy.sh &
+i3lock -c 000000 -e
+sleep 0.5
 
+xsetroot -cursor top_left_arrow
 setxkbmap -option ctrl:nocaps
 xrdb -merge $HOME/.Xresources
 xset s off -dpms
