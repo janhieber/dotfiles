@@ -7,6 +7,8 @@ Xft.antialias: 1
 Xft.rgba: rgb
 Xft.dpi: 96
 
+Xcursor.theme: Paper
+
 !! urxvt setting
 urxvt.perl-ext:
 urxvt.font: xft:monospace:pixelsize=12
@@ -24,24 +26,25 @@ urxvt.internalBorder: 2
 urxvt*pointerBlank: true
 
 !! zenburn colors
-*background: #3f3f3f
-*foreground: #dcdccc
-*color0: #3f3f3f
-*color1: #cc9393
-*color2: #7f9f7f
-*color3: #d0bf8f
-*color4: #6ca0a3
-*color5: #dc8cc3
-*color6: #93e0e3
-*color7: #dcdccc
-*color8: #000000
-*color9: #dca3a3
-*color10: #bfebbf
-*color11: #f0dfaf
-*color12: #8cd0d3
-*color13: #dc8cc3
-*color14: #93e0e3
-*color15: #ffffff
+*foreground:   #c5c8c6
+*background:   #1d1f21
+*cursorColor:  #aeafad
+*color0:       #000000
+*color1:       #912226
+*color2:       #778900
+*color3:       #ae7b00
+*color4:       #1d2594
+*color5:       #682a9b
+*color6:       #2b6651
+*color7:       #929593
+*color8:       #666666
+*color9:       #cc6666
+*color10:      #b5bd68
+*color11:      #f0c674
+*color12:      #81a2be
+*color13:      #b294bb
+*color14:      #8abeb7
+*color15:      #ecebec
 
 !! rofi colors
 rofi.color-enabled: true
