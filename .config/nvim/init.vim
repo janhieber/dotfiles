@@ -13,6 +13,7 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('jnurmine/Zenburn')
+  call dein#add('chriskempson/vim-tomorrow-theme')
   " UI enhancement
   call dein#add('scrooloose/nerdtree')
   call dein#add('majutsushi/tagbar')
@@ -45,7 +46,7 @@ syntax enable
 " detect drak/light background
 set background=dark
 "set termguicolors
-colorscheme zenburn
+colorscheme Tomorrow-Night
 
 
 highlight Pmenu ctermfg=black ctermbg=darkcyan
@@ -70,7 +71,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 
 " airline config
 let g:airline_powerline_fonts = 1
-let g:airline_theme='zenburn'
+let g:airline_theme='tomorrow'
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamemod = ':.'
@@ -140,22 +141,6 @@ set ruler
 set showmatch
 set cursorline
 set nostartofline
-
-
-
-
-""""""""""""""""""" some UI stuff
-" detect drak/light background
-set background=dark
-"set termguicolors
-colorscheme zenburn
-" spell checking style
-hi clear SpellBad
-hi SpellBad cterm=underline
-
-set statusline=%<%f%m\ %r\ %h\ %w%=%l,%c\ %p%%
-set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
-
 
 
 """"""""""""""""""" some special stuff and hacks
