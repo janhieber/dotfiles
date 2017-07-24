@@ -151,6 +151,9 @@ cmap w!! %!sudo tee > /dev/null %
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
+" fix del key in st opening help, we don't need F1
+map <F1> <del>
+map! <F1> <del>
 
 function! CloseOnLast()
     let cnt = 0

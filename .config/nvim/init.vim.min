@@ -42,4 +42,7 @@ set rulerformat=%27(%{strftime('%a\ %e\ %b\ %I:%M\ %p')}\ %2l,%-2(%c%V%)\ %P%)
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 
+" fix del key in st opening help, we don't need F1
+map <F1> <del>
+map! <F1> <del>
 
