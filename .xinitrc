@@ -1,11 +1,14 @@
 #!/bin/sh
 
-~/bin/i3lock-fancy.sh &
+i3lock -c 000000 -e
+sleep 0.5
 
-setxkbmap -option ctrl:nocaps
-xrdb -merge $HOME/.Xresources
+xsetroot -cursor top_left_arrow
+xsetroot -cursor_name left_ptr
 xset s off -dpms
 xset r rate 250 45
+xrdb -merge $HOME/.Xresources
+setxkbmap -option ctrl:nocaps
 numlockx on
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then

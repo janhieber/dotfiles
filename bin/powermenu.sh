@@ -9,8 +9,7 @@ function sure {
 
 [[ $res = "suspend" ]]   && systemctl suspend
 [[ $res = "suspend undock" ]]   && autorandr -l default && systemctl suspend
-[[ $res = "lock" ]]      && i3lock -i ~/.wallpaper -c 000000 -e
-#[[ $res = "lock" ]]      && ~/bin/i3lock-fancy.sh
+[[ $res = "lock" ]]      && i3lock -c 000000 -e
 [[ $res = "logout" ]]    && sure $res 'i3-msg exit'
 [[ $res = "reboot" ]]    && sure $res 'systemctl reboot'
 [[ $res = "reboot to windows" ]]    && sure "$res" 'sudo /usr/local/bin/reboot-windows'

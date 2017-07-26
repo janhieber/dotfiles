@@ -86,8 +86,9 @@ interval=-2
 min_width=CPU: 100%
 
 [load_average]
+command=~/bin/i3blocks/load_average
 label=LOAD:
-interval=10
+interval=2
 
 [time]
 command=date '+%a %d. %b %H:%M'
