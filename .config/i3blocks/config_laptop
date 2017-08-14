@@ -29,19 +29,20 @@ separator_block_width=15
 markup=none
 color=#1793d0
 
-[music_previous]
+
+[playerctl]
 instance=previous
 command=~/.config/i3blocks/blocks/playerctl
 interval=once
 separator=false
 
-[music_play-pause]
+[playerctl]
 instance=play-pause
 command=~/.config/i3blocks/blocks/playerctl
 interval=once
 separator=false
 
-[music_next]
+[playerctl]
 instance=next
 command=~/.config/i3blocks/blocks/playerctl
 interval=once
@@ -62,6 +63,7 @@ interval=30
 label=WLAN:
 instance=wlp3s0
 interval=10
+signal=12
 
 [battery]
 label=BAT:
