@@ -42,23 +42,24 @@ case ${STATE} in
                 EXTRA="#FFAD2D"
             fi
         fi
+        TEXT="${LEVEL} % (${INFO})"
         ;;
 
     charging)
-        INFO='CHR'
+        TEXT="${LEVEL} % (chr)"
         ;;
 
     fully-charged)
-        INFO='FULL'
+        TEXT="full"
         ;;
 
     *)
-        INFO='ERR'
+        TEXT='ERR'
         ;;
 esac
 
-echo "${LEVEL} % (${INFO})"
-echo "${LEVEL} % (${INFO})"
+echo $TEXT
+echo $TEXT
 [[ -n ${EXTRA} ]] && echo ${EXTRA}
 
 exit 0
