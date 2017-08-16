@@ -122,13 +122,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-include ./config_`hostname`
-
-# load startup apps
-exec --no-startup-id ~/bin/startup_`hostname`.sh
-
 #                       <border> <backg>  <text>  <indicator> <child_border>
-client.focused          #333333 #6ca0a3 #222222 #2e9ef4
+client.focused          #333333 #1793d0 #222222 #2e9ef4
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
@@ -139,11 +134,15 @@ bar {
   position top
   colors {
     background #000000
-    statusline #6CA0A3
-    focused_workspace  #222222 #6ca0a3
-    active_workspace   #222222 #6ca0a3
+    statusline #1793d0
+    focused_workspace  #222222 #1793d0
+    active_workspace   #222222 #1793d0
     inactive_workspace #888888 #222222
     urgent_workspace   #222222 #cc9393
   }
 }
+
+# load startup apps
+exec --no-startup-id ~/bin/startup_`hostname`.sh
+
 

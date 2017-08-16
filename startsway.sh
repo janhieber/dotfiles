@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Keyboard
+export WLC_LIBINPUT=1
+export XKB_DEFAULT_LAYOUT=de
+export WLC_REPEAT_DELAY=250
+export ELC_REPEAT_RATE=45
+
+# Java
+#_JAVA_AWT_WM_NONREPARENTING=1
+
+# QT
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_DISABLE_WINDOWDECORATION=1
+export QT_WAYLAND_FORCE_DPI=96
+# GTK
+#export GDK_BACKEND=wayland
+export CLUTTER_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
+
+exec sway -d 2> ~/.sway.log

@@ -13,9 +13,10 @@ then
     echo "down"
 else
     SSID=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"SSID:") {print $(i+1)}}}')
-    BRATE=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"bitrate:") {print $(i+1), $(i+2)}}}')
-    SIGNAL=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"signal:") {print $(i+1), $(i+2)}}}')
-    TEXT="${SSID}@[${BRATE}, ${SIGNAL}]"
+#    BRATE=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"bitrate:") {print $(i+1), $(i+2)}}}')
+#    SIGNAL=$(echo $INFO | awk '{for(i=1;i<=NF;i++) {if($i~"signal:") {print $(i+1), $(i+2)}}}')
+#    TEXT="${SSID}@[${BRATE}, ${SIGNAL}]"
+    TEXT="${SSID}"
     echo ${TEXT}
     echo ${TEXT}
 fi

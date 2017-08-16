@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# switch wlan
+if [ "$1" = "enp0s25" ]; then
+    case "$2" in
+        up)
+            nmcli r wifi off
+            ;;
+        down)
+            nmcli r wifi on
+            ;;
+    esac
+fi
+
+# notify i3blocks
+pkill -RTMIN+12 i3blocks
+

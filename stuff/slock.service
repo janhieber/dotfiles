@@ -7,7 +7,7 @@ Before=sleep.target
 Type=forking
 User=jan
 Environment=DISPLAY=:0
-ExecStart=/home/jan/bin/i3lock-fancy.sh
+ExecStart=/home/jan/bin/lock.sh
 
 [Install]
 WantedBy=sleep.target

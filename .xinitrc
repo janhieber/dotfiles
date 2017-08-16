@@ -1,6 +1,6 @@
 #!/bin/sh
 
-i3lock -c 000000 -e
+~/bin/lock.sh
 sleep 0.5
 
 # this is for QT icon theme
