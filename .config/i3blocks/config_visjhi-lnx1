@@ -24,16 +24,10 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/lib/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/dispatcher
 separator_block_width=15
 markup=none
-
-[volume]
-label=VOL
-instance=Master
-#instance=PCM
-interval=once
-signal=10
+color=#1793d0
 
 
 [disk]
@@ -69,19 +63,18 @@ interval=30
 [memory]
 label=MEM:
 #separator=false
-interval=15
+interval=10
 
 
 [cpu_usage]
-command=~/bin/i3blocks/cpu_usage
 label=CPU:
-interval=3
+interval=2
 min_width=CPU: 100%
 #separator=false
 
 [load_average]
 label=LOAD:
-interval=10
+interval=2
 
 
 
