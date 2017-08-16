@@ -37,6 +37,8 @@ alias gaa='git add -u'
 alias gc='git commit -m'
 alias gp='git push'
 alias gpu='git pull'
+alias gd='git diff'
+alias gch='git checkout'
 
 alias ..='cd ../'
 alias ...='cd ../../'
@@ -156,6 +158,15 @@ bindkey "\e\e" sudo-command-line
 # exports
 [[ -f /usr/bin/nvim ]] && EDITOR='nvim' || EDITOR='vim'
 export EDITOR
+
+function preexec() {
+    printf "\x1b]0;[%s] - st\x07" "$1";
+}
+
+function precmd() {
+    print -Pn "\e]2;[%~] - st\a]"
+}
+
 
 # fix for alacritty
 nvim(){

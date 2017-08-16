@@ -3,6 +3,9 @@
 i3lock -c 000000 -e
 sleep 0.5
 
+# this is for QT icon theme
+export DESKTOP_SESSION=gnome
+
 xsetroot -cursor top_left_arrow
 xsetroot -cursor_name left_ptr
 xset s off -dpms
