@@ -1,4 +1,7 @@
-# Enable options:
+# if not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# enable options
 shopt -s cdspell
 shopt -s cdable_vars
 shopt -s checkhash
@@ -20,6 +23,8 @@ fi
 
 alias c='clear'
 alias q='exit'
+[[ -f /usr/bin/vim ]] && alias v=vim
+[[ -f /usr/bin/nvim ]] && alias v=nvim
 
 alias gs='git status'
 alias ga='git add .'
@@ -36,7 +41,6 @@ alias ll='ls -lh --color=auto --group-directories-first'
 # this is how I manage the dotfiles
 # see: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 
 ## other stuff
 # exports
