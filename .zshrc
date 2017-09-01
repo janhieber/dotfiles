@@ -44,13 +44,13 @@ alias gch='git checkout'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias -g L='| less'
-alias -g G='| grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d,html,js,map}'
+alias -g L='| less -R'
+alias -g G='| grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
+alias grep='grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d,html,js,map}'
 
 [[ -x /usr/bin/exa ]] && LS='exa' || LS='ls'
-alias ls="${LS} --group-directories-first"
-alias ll="${LS} -lh --group-directories-first"
+alias ls="${LS} --group-directories-first --color=always"
+alias ll="${LS} -lh --group-directories-first --color=always"
 unset LS
 
 # this is how I manage the dotfiles
