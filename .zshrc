@@ -17,7 +17,8 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 #setopt HIST_BEEP               # Beep when accessing nonexistent history.
 
 ## alias declaration
-[[ -f /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
+[[ -x /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
+
 if [[ -f /usr/bin/pacman ]]; then
     if [[ -f /usr/bin/pacaur ]]; then
         alias p='pacaur'
@@ -37,19 +38,25 @@ alias gaa='git add -u'
 alias gc='git commit -m'
 alias gp='git push'
 alias gpu='git pull'
+alias gd='git diff'
+alias gch='git checkout'
 
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias -g L='| less'
-alias -g G='| grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d,html,js,map}'
-alias ls='ls --color=auto --group-directories-first'
-alias ll='ls -lh --color=auto --group-directories-first'
+alias -g L='| less -R'
+alias -g G='| grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d}'
+alias grep='grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn} --exclude=\*.{o,lst,d,html,js,map}'
+
+[[ -x /usr/bin/exa ]] && LS='exa' || LS='ls'
+alias ls="${LS} --group-directories-first --color=always"
+alias ll="${LS} -lh --group-directories-first --color=always"
+unset LS
 
 # this is how I manage the dotfiles
 # see: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 # calculator
 function =
 {
@@ -156,6 +163,15 @@ bindkey "\e\e" sudo-command-line
 # exports
 [[ -f /usr/bin/nvim ]] && EDITOR='nvim' || EDITOR='vim'
 export EDITOR
+
+function preexec() {
+    printf "\x1b]0;[%s] - st\x07" "$1";
+}
+
+function precmd() {
+    print -Pn "\e]2;[%~] - st\a]"
+}
+
 
 # fix for alacritty
 nvim(){
