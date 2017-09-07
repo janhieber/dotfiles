@@ -31,6 +31,7 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('lervag/vimtex')
+  call dein#add('mzlogin/vim-markdown-toc')
   call dein#end()
   call dein#save_state()
 endif
