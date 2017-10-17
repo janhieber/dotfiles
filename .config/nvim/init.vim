@@ -119,6 +119,9 @@ function! s:check_back_space() abort "{{{
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
 
+" neosnippet
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
 " vimtex
 let g:tex_flavor = 'latex'
