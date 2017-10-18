@@ -18,5 +18,6 @@ export QT_WAYLAND_FORCE_DPI=96
 #export GDK_BACKEND=wayland
 export CLUTTER_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
+export GDK_DPI_SCALE=1.3
 
 exec sway -d 2> ~/.sway.log
