@@ -19,7 +19,9 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('majutsushi/tagbar')
   " usability improvement
   call dein#add('bogado/file-line')
+  call dein#add('qpkorr/vim-bufkill')
   " programming support
+  call dein#add('sheerun/vim-polyglot')
   call dein#add('tpope/vim-fugitive')
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
@@ -121,7 +123,8 @@ endfunction"}}}
 
 " neosnippet
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " vimtex
 let g:tex_flavor = 'latex'
@@ -182,7 +185,7 @@ function! CloseOnLast()
         wq
     else
         w
-        bd
+        BD
     endif
 endfunction
 nnoremap ZZ :call CloseOnLast()<CR>
@@ -206,9 +209,9 @@ nnoremap <A-6> :6b<CR>
 nnoremap <A-7> :7b<CR>
 nnoremap <A-8> :8b<CR>
 nnoremap <A-9> :9b<CR>
-nnoremap <A-q> :bd<CR>
+nnoremap <A-q> :BD<CR>
 
-"nnoremap ZZ :w<CR>:bd<CR>
+"nnoremap ZZ :w<CR>:BD<CR>
 
 " when pressing r, replace marked section with register
 vmap r "_dP
