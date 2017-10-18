@@ -19,7 +19,9 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('majutsushi/tagbar')
   " usability improvement
   call dein#add('bogado/file-line')
+  call dein#add('qpkorr/vim-bufkill')
   " programming support
+  call dein#add('sheerun/vim-polyglot')
   call dein#add('tpope/vim-fugitive')
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
@@ -104,9 +106,25 @@ let g:clang_format#style_options = {
 
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+set completeopt-=preview
 let g:deoplete#sources#clang#executable = "/usr/bin/clang"
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/"
+
+imap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+" neosnippet
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " vimtex
 let g:tex_flavor = 'latex'
@@ -167,7 +185,7 @@ function! CloseOnLast()
         wq
     else
         w
-        bd
+        BD
     endif
 endfunction
 nnoremap ZZ :call CloseOnLast()<CR>
@@ -191,9 +209,9 @@ nnoremap <A-6> :6b<CR>
 nnoremap <A-7> :7b<CR>
 nnoremap <A-8> :8b<CR>
 nnoremap <A-9> :9b<CR>
-nnoremap <A-q> :bd<CR>
+nnoremap <A-q> :BD<CR>
 
-"nnoremap ZZ :w<CR>:bd<CR>
+"nnoremap ZZ :w<CR>:BD<CR>
 
 " when pressing r, replace marked section with register
 vmap r "_dP

@@ -27,6 +27,7 @@
 # around the `%s`
 image/x-imgur-album; feh -g 640x480 %s; test=test -n "$DISPLAY"
 image/*; feh -g 640x480 '%s'; test=test -n "$DISPLAY"
+#image/*; sxiv '%s'; test=test -n "$DISPLAY"
 
 # Youtube videos are assigned a custom mime-type, which can be streamed with
 # vlc or youtube-dl.
