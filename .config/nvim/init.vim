@@ -163,6 +163,11 @@ set nostartofline
 
 
 """"""""""""""""""" some special stuff and hacks
+
+" move lines up and down with Alt+j/k
+nnoremap <S-Up> :m-2<CR>
+nnoremap <S-Down> :m+<CR>
+
 " Get root privilieges while editing a file
 cmap w!! %!sudo tee > /dev/null %
 
@@ -195,9 +200,9 @@ nnoremap ZZ :call CloseOnLast()<CR>
 " Buffer keybinds
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-nnoremap <A-j> :bp<CR>
+nnoremap <A-h> :bp<CR>
 nnoremap <Leader><Left> :bp<CR>
-nnoremap <A-k> :bn<CR>
+nnoremap <A-l> :bn<CR>
 nnoremap <Leader><Right> :bn<CR>
 nnoremap <A-g> :e#<CR>
 nnoremap <A-1> :1b<CR>
