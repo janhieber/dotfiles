@@ -114,7 +114,7 @@ let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/"
 
 let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/usr/src/rust/src'
+let g:deoplete#sources#rust#rust_source_path='/usr/src/rust/src/'
 
 
 imap <silent><expr> <TAB>
