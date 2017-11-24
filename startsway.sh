@@ -14,10 +14,11 @@ export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export QT_DISABLE_WINDOWDECORATION=1
 export QT_WAYLAND_FORCE_DPI=96
+
 # GTK
-#export GDK_BACKEND=wayland
+export GDK_BACKEND=wayland
 export CLUTTER_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 export GDK_DPI_SCALE=1.3
 
-exec sway -d 2> ~/.sway.log
+exec sway -d > ~/.sway.log
