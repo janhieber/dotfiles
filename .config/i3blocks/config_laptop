@@ -27,7 +27,6 @@
 command=~/.config/i3blocks/dispatcher
 separator_block_width=15
 markup=none
-color=#1793d0
 
 
 [playerctl]

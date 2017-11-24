@@ -12,8 +12,7 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('ryanoasis/vim-devicons')
-  call dein#add('jnurmine/Zenburn')
-  call dein#add('chriskempson/vim-tomorrow-theme')
+  call dein#add('arcticicestudio/nord-vim')
   " UI enhancement
   call dein#add('scrooloose/nerdtree')
   call dein#add('majutsushi/tagbar')
@@ -21,19 +20,21 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('bogado/file-line')
   call dein#add('qpkorr/vim-bufkill')
   " programming support
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('tpope/vim-fugitive')
   call dein#add('jsfaint/gen_tags.vim')
   call dein#add('rhysd/vim-clang-format')
   call dein#add('vim-scripts/DoxygenToolkit.vim')
+  call dein#add('lervag/vimtex')
+  call dein#add('mzlogin/vim-markdown-toc')
+  call dein#add('rust-lang/rust.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('sebastianmarkow/deoplete-rust')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('lervag/vimtex')
-  call dein#add('mzlogin/vim-markdown-toc')
+  " other useful
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('tpope/vim-fugitive')
   call dein#end()
   call dein#save_state()
 endif
@@ -49,7 +50,7 @@ syntax enable
 " detect drak/light background
 set background=dark
 "set termguicolors
-colorscheme Tomorrow-Night
+colorscheme nord
 
 
 highlight Pmenu ctermfg=black ctermbg=darkcyan
@@ -74,7 +75,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 
 " airline config
 let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
+let g:airline_theme='nord'
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamemod = ':.'
@@ -111,6 +112,10 @@ set completeopt-=preview
 let g:deoplete#sources#clang#executable = "/usr/bin/clang"
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/"
+
+let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/usr/src/rust/src/'
+
 
 imap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
@@ -163,6 +168,11 @@ set nostartofline
 
 
 """"""""""""""""""" some special stuff and hacks
+
+" move lines up and down with Alt+j/k
+nnoremap <S-Up> :m-2<CR>
+nnoremap <S-Down> :m+<CR>
+
 " Get root privilieges while editing a file
 cmap w!! %!sudo tee > /dev/null %
 
@@ -195,9 +205,9 @@ nnoremap ZZ :call CloseOnLast()<CR>
 " Buffer keybinds
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-nnoremap <A-j> :bp<CR>
+nnoremap <A-h> :bp<CR>
 nnoremap <Leader><Left> :bp<CR>
-nnoremap <A-k> :bn<CR>
+nnoremap <A-l> :bn<CR>
 nnoremap <Leader><Right> :bn<CR>
 nnoremap <A-g> :e#<CR>
 nnoremap <A-1> :1b<CR>
