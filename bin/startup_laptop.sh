@@ -16,6 +16,8 @@ compton -b
 # launch some apps
 gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 nm-applet &
+pa-applet &
+blueman-applet &
 nextcloud &
 dunst &
 profile-cleaner f &
