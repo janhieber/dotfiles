@@ -29,23 +29,6 @@ separator_block_width=15
 markup=none
 
 
-[playerctl]
-instance=previous
-command=~/.config/i3blocks/blocks/playerctl
-interval=once
-separator=false
-
-[playerctl]
-instance=play-pause
-command=~/.config/i3blocks/blocks/playerctl
-interval=once
-separator=false
-
-[playerctl]
-instance=next
-command=~/.config/i3blocks/blocks/playerctl
-interval=once
-
 
 [disk]
 label=/:

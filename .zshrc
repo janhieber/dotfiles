@@ -226,12 +226,8 @@ function prompt_ssh {
 }
 
 function prompt_chroot {
-    if [[ $(stat -c %i /) -gt 3 ]]; then
-        if [[ -n $SCHROOT_SESSION_ID ]];then
-            print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
-        else
-            print "%n@%F{cyan}CHROOT[%f???%F{cyan}]%f"
-        fi
+    if [[ -n $SCHROOT_CHROOT_NAME ]]; then
+        print "%n@%F{cyan}CHROOT[%f$SCHROOT_CHROOT_NAME%F{cyan}]%f"
     fi
 }
 
