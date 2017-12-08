@@ -25,6 +25,8 @@ urxvt.keysym.M-Delete: perl:matcher:list
 urxvt.internalBorder: 2
 urxvt*pointerBlank: true
 
+XTerm*faceName: monospaced
+XTerm*faceSize: 12
 
 ! +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ! title      Nord XResources                                    +

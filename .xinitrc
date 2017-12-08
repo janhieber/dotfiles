@@ -1,12 +1,10 @@
 #!/bin/sh
 
-#~/bin/lock.sh
-#sleep 0.5
+[[ -x ~/bin/lock.sh ]] && ~/bin/lock.sh
 
 # this is for QT icon theme
 export DESKTOP_SESSION=gnome
 
-xsetroot -cursor top_left_arrow
 xsetroot -cursor_name left_ptr
 #xset s off -dpms
 xset r rate 250 45

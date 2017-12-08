@@ -165,6 +165,7 @@ set ruler
 set showmatch
 set cursorline
 set nostartofline
+set textwidth=100
 
 
 """"""""""""""""""" some special stuff and hacks
