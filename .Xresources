@@ -98,12 +98,13 @@ st.opacity:      255
 
 !! rofi colors
 rofi.color-enabled: true
-!                  bg       border   separator
-rofi.color-window: #3f3f3f, #222222, #dcdccc
-!                  bg       fg       bg-alt   hl-bg    hl-fg
-rofi.color-normal: #3f3f3f, #dcdccc, #383838, #4f4f4f, #ffffef
-rofi.color-active: #4c7073, #dcdccc, #366060, #5c888b, #ffffef
-rofi.color-urgent: #8c5353, #dcdccc, #7c4343, #9c6363, #ffffef
+! Property Name     BG       Border   Separator
+rofi.color-window:  #3b4252, #3b4252, #2e3440
+! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+rofi.color-normal:  #3b4252, #e5e9f0, #3b4252, #3b4252, #8fbcbb
+rofi.color-active:  #3b4252, #ebcb8b, #3b4252, #3b4252, #ebcb8b
+rofi.color-urgent: #3b4252, #88c0d0, #3b4252, #3b4252, #88c0d0
+
 
 rofi.font: Sans 13
 rofi.padding: 40
