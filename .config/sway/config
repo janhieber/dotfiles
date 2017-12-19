@@ -122,23 +122,30 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#                       <border> <backg>  <text>  <indicator> <child_border>
-client.focused          #333333 #1793d0 #222222 #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
+# window settings
+new_window none
+for_window [class=(?i)st] border pixel 1
+
+# colors                border  backgr. text    indicator child_border
+client.focused          #5E81AC #5E81AC #ffffff #5E81AC
+client.focused_inactive #5E81AC #5E81AC #ffffff #5E81AC
+client.unfocused        #3B4252 #3B4252 #ffffff #3B4252
+client.urgent           #BF616A #BF616A #ffffff #BF616A
+client.background       #000000
 
 bar {
   status_command i3blocks -c ~/.config/i3blocks/config_`hostname`
   tray_output primary
   position top
   colors {
-    background #000000
-    statusline #1793d0
-    focused_workspace  #1793d0 #1793d0 #222222
-    active_workspace   #1793d0 #1793d0 #222222
-    inactive_workspace #222222 #222222 #888888
-    urgent_workspace   #cc9393 #cc9393 #222222
+    background #5E81AC
+    statusline #ffffff
+    separator  #3B4252
+    # border background text
+    focused_workspace  #3B4252 #3B4252 #ffffff
+    active_workspace   #3B4252 #3B4252 #ffffff
+    inactive_workspace #5E81AC #5E81AC #ffffff
+    urgent_workspace   #BF616A #BF616A #ffffff
   }
 }
 

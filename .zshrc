@@ -20,9 +20,9 @@ setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entr
 [[ -x /usr/bin/nvim ]] && alias v='nvim' || alias v='vim'
 
 if [[ -f /usr/bin/pacman ]]; then
-    if [[ -f /usr/bin/pacaur ]]; then
-        alias p='pacaur'
-        alias sp='pacaur'
+    if [[ -f /usr/bin/yay ]]; then
+        alias p='yay'
+        alias sp='yay'
     else
         alias p='pacman'
         [[ "$(id -u)" -ne 0 ]] && alias sp='sudo pacman' || alias sp='pacman'
@@ -165,11 +165,11 @@ bindkey "\e\e" sudo-command-line
 export EDITOR
 
 function preexec() {
-    printf "\x1b]0;[%s] - st\x07" "$1";
+    printf "\x1b]0;[%s] running\x07" "$1";
 }
 
 function precmd() {
-    print -Pn "\e]2;[%~] - st\a]"
+    print -Pn "\e]2;[%~] terminal\a]"
 }
 
 
