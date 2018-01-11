@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ooo:color-table xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:ooo="http://openoffice.org/2004/office">
+
+<!-- Black and white -->
+<draw:color draw:name="Black" draw:color="#000000" />
+<draw:color draw:name="White" draw:color="#ffffff" />
+
+<!-- https://vector.com/portal/medien/cmc/ci/cd_2016/Vector_Color_Chart_V1.6_CMYK.pdf -->
+
+<!-- primary -->
+<draw:color draw:name="Vector Red" draw:color="#b70032" />
+<draw:color draw:name="Vector Gray" draw:color="#565c5e" />
+<draw:color draw:name="Vector Gray 73%" draw:color="#848b8e" />
+<draw:color draw:name="Vector Gray 47%" draw:color="#b1b6ba" />
+<draw:color draw:name="Vector Gray 22%" draw:color="#dadee1" />
+
+<!-- secondary -->
+<draw:color draw:name="Dark Orange" draw:color="#EF7C00" />
+<draw:color draw:name="Light Orange" draw:color="#FBB900" />
+<draw:color draw:name="Light Green" draw:color="#92C255" />
+<draw:color draw:name="Dark Green" draw:color="#00A765" />
+<draw:color draw:name="Light Blue" draw:color="#43BFDE" />
+<draw:color draw:name="Dark Blue" draw:color="#028FC3" />
+<draw:color draw:name="Violet" draw:color="#8884C1" />
+
+<!-- custom -->
+<draw:color draw:name="A" draw:color="#DFFCD9" />
+<draw:color draw:name="B" draw:color="#E8D3B5" />
+<draw:color draw:name="C" draw:color="#FFEABE" />
+<draw:color draw:name="D" draw:color="#788C9F" />
+</ooo:color-table>
