@@ -92,6 +92,7 @@ let g:gen_tags#gtags_auto_gen = 1
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+
 " nerdtree
 nmap <F7> :NERDTreeToggle<CR>
 
@@ -176,6 +177,7 @@ nnoremap <S-Down> :m+<CR>
 
 " Get root privilieges while editing a file
 cmap w!! %!sudo tee > /dev/null %
+
 
 " highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red

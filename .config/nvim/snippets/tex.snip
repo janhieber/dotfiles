@@ -1,11 +1,23 @@
 snippet gls
     \gls{${1:TARGET}}${0}
 
+snippet glspl
+    \glspl{${1:TARGET}}${0}
+
+
 snippet footurl
     \footnote{\url{${1:TARGET}}}${0}
 
 snippet it
     \textit{${1:TARGET}}${0}
+
+snippet tt
+    \texttt{${1:TARGET}}${0}
+
+snippet bf
+    \textbf{${1:TARGET}}${0}
+
+
 
 snippet chap
 alias chapter
@@ -25,10 +37,10 @@ snippet fig
 alias figure
 options head
     \begin{figure}[H]
-	    \centering
+        \centering
         \includegraphics[scale=1]{${1}}
-    	\caption{${2}}
-    	\label{fig:${3}}
+        \caption{${2}}
+        \label{fig:${3}}
     \end{figure}
     ${0}
 
