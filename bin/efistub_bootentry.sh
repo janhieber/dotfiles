@@ -18,11 +18,11 @@
 NAME='Arch Linux EFISTUB'
 DRIVE='/dev/sda'
 BOOTPART=1
-KERNEL='/EFI/arch/vmlinuz-linux'
-ROOT='UUID=4d4167d6-761e-4b5b-b92b-a803a7c95258'
-RESUME='UUID=5c323946-60e1-4cfe-8e50-140a685f8648'
-INITRD1='/EFI/arch/intel-ucode.img'
-INITRD2='/EFI/arch/initramfs-linux.img'
+KERNEL='/vmlinuz-linux'
+ROOT='/dev/mapper/cryptoroot'
+#RESUME='/dev/mapper/cryptoswap'
+INITRD1='/intel-ucode.img'
+INITRD2='/initramfs-linux.img'
 PARAMS='rw quiet'
 
 # looking for old entry
@@ -34,6 +34,7 @@ fi
 
 # building opts
 ARGS=''
+ARGS="$ARGS cryptdevice=UUID=005905ff-273c-4a3a-9ed5-b2b6f2d0d71b:cryptoroot:allow-discards"
 [[ ${#ROOT} -gt 2 ]] && ARGS="$ARGS root=$ROOT"
 [[ ${#RESUME} -gt 2 ]] && ARGS="$ARGS resume=$RESUME"
 [[ ${#INITRD1} -gt 2 ]] && ARGS="$ARGS initrd=$INITRD1"

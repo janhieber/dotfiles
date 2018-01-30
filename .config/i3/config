@@ -127,9 +127,9 @@ bindsym $mod+r mode "resize"
 for_window [class=(?i)st] border pixel 1
 
 # colors                border  backgr. text    indicator child_border
-client.focused          #5E81AC #5E81AC #ffffff #5E81AC
-client.focused_inactive #5E81AC #5E81AC #ffffff #5E81AC
-client.unfocused        #3B4252 #3B4252 #ffffff #3B4252
+client.focused          #000000 #000000 #ffffff #5E81AC
+client.focused_inactive #000000 #000000 #ffffff #5E81AC
+client.unfocused        #2E3440 #2E3440 #ffffff #3B4252
 client.urgent           #BF616A #BF616A #ffffff #BF616A
 client.background       #000000
 
@@ -138,13 +138,13 @@ bar {
   tray_output primary
   position top
   colors {
-    background #5E81AC
-    statusline #ffffff
-    separator  #3B4252
+    background #000000
+    statusline #ECEFF4
+    separator  #ECEFF4
     # border background text
-    focused_workspace  #3B4252 #3B4252 #ffffff
-    active_workspace   #3B4252 #3B4252 #ffffff
-    inactive_workspace #5E81AC #5E81AC #ffffff
+    focused_workspace  #ECEFF4 #ECEFF4 #000000
+    active_workspace   #ECEFF4 #ECEFF4 #000000
+    inactive_workspace #000000 #000000 #ECEFF4
     urgent_workspace   #BF616A #BF616A #ffffff
   }
 }

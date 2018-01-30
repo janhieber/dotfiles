@@ -8,7 +8,7 @@ xrandr --addmode DP-2 '1920x1200_60.00'
 #xrandr --addmode DP-2-1 "1920x1080_60.00"
 
 # setup displays
-autorandr -c --default default
+#autorandr -c --default default
 
 feh --no-fehbg --bg-tile ~/.wallpaper
 compton -b
@@ -20,5 +20,4 @@ pa-applet &
 blueman-applet &
 nextcloud &
 dunst &
-profile-cleaner f &
 

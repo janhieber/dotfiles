@@ -55,7 +55,8 @@ XTerm*faceSize: 12
 #define nord15 #B48EAD
 
 *.foreground:   nord4
-*.background:   nord0
+!*.background:   nord0
+*.background:   #000000
 *.cursorColor:  nord4
 *fading: 35
 *fadeColor: nord3
